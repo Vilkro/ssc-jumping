@@ -1,211 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Serious Sam Rocket Jump Records</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SSC Rocket Jump Records</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500&display=swap');
 
-  :root {
-    --bg-main: #121212;
-    --bg-accent: rgba(40, 40, 40, 0.85);
-    --text-main: #e0e0e0;
-    --text-secondary: #aaa;
-    --rocket-color: #ffa65c;
-    --cannon-color: #64c8ff;
-    --table-border: #444;
-  }
+:root {
+  --bg-main: #2e2e2e;
+  --bg-accent: rgba(50, 50, 50, 0.9);
+  --text-main: #e0e0e0;
+  --text-secondary: #aaa;
+  --rocket-color: #ffa65c;
+  --cannon-color: #64c8ff;
+  --border-color: #555;
+}
 
-  body {
-    margin: 0;
-    font-family: 'Rajdhani', sans-serif;
-    color: var(--text-main);
-    background-color: var(--bg-main);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow-x: hidden;
-    padding: 1rem;
-  }
+body {
+  margin: 0;
+  font-family: 'Rajdhani', sans-serif;
+  color: var(--text-main);
+  background-color: var(--bg-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+  padding: 1rem;
+  position: relative;
+}
 
-  /* Background subtle pattern */
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-    background-size: 50px 50px;
-    z-index: 0;
-  }
+/* Background subtle gray grid with gradient movement */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 50px 50px;
+  z-index: 0;
+  animation: moveGrid 25s linear infinite;
+  opacity: 0.4;
+}
 
-  header {
-    text-align: center;
-    padding: 2rem 1rem 1rem;
-    position: relative;
-    z-index: 1;
-  }
+@keyframes moveGrid {
+  from { background-position: 0 0; }
+  to { background-position: 50px 50px; }
+}
 
-  header h1 {
-    font-size: clamp(2rem, 2vw + 1rem, 3rem);
-    color: #ffb84d;
-    margin-bottom: 0.3rem;
-    text-shadow: 0 0 6px rgba(255, 184, 77, 0.5);
-  }
+header {
+  text-align: center;
+  padding: 2rem 1rem 1rem;
+  position: relative;
+  z-index: 1;
+}
 
-  header p {
-    color: var(--text-secondary);
-    font-size: clamp(1rem, 0.8vw + 0.6rem, 1.2rem);
-  }
+header h1 {
+  font-size: clamp(2rem, 2vw + 1rem, 3rem);
+  color: #ffb84d;
+  margin-bottom: 0.3rem;
+  text-shadow: 0 0 6px rgba(255, 184, 77, 0.5);
+}
 
-  .telegram-link {
-    display: inline-block;
-    margin-top: 1rem;
-    background: linear-gradient(90deg, #ff8c00, #f0b90b);
-    color: #000;
-    padding: 0.8rem 1.6rem;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
+header p {
+  color: var(--text-secondary);
+  font-size: clamp(1rem, 0.8vw + 0.6rem, 1.2rem);
+}
 
-  .telegram-link:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.25);
-  }
+.telegram-link {
+  display: inline-block;
+  margin-top: 1rem;
+  background: linear-gradient(90deg, #ff8c00, #f0b90b);
+  color: #000;
+  padding: 0.7rem 1.4rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
 
-  .definitions {
-    background: var(--bg-accent);
-    padding: 1rem 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-    margin: 1.5rem auto;
-    font-size: clamp(0.95rem, 0.6vw + 0.5rem, 1.05rem);
-    max-width: 700px;
-    line-height: 1.5;
-  }
+.telegram-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+}
 
-  .definitions strong { color: var(--rocket-color); }
+.definitions {
+  background: var(--bg-accent);
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+  margin: 1.5rem auto;
+  font-size: clamp(0.95rem, 0.6vw + 0.5rem, 1.05rem);
+  max-width: 700px;
+  line-height: 1.5;
+}
 
-  /* Table container to allow scroll if too many rows */
-  .table-container {
-    width: 100%;
-    max-width: 1200px;
-    max-height: 65vh;
-    overflow-y: auto;
-    background: var(--bg-accent);
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-    border: 1px solid var(--table-border);
-  }
+.definitions strong { color: var(--rocket-color); }
 
-  table {
-    border-collapse: collapse;
-    width: 100%;
-    table-layout: fixed;
-  }
+/* Table container for scrollable body */
+.table-container {
+  width: 100%;
+  max-width: 1200px;
+  max-height: 65vh;
+  overflow-y: auto;
+  background: var(--bg-accent);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  border: 1px solid var(--border-color);
+}
 
-  thead {
-    position: sticky;
-    top: 0;
-    background: rgba(30,30,30,0.95);
-    z-index: 2;
-  }
+table {
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed;
+}
 
-  th, td {
-    padding: 0.8rem 0.6rem;
-    text-align: center;
-    border-bottom: 1px solid var(--table-border);
-    word-wrap: break-word;
-  }
+thead {
+  position: sticky;
+  top: 0;
+  background: rgba(45,45,45,0.95);
+  z-index: 2;
+}
 
-  th {
-    font-weight: 600;
-    font-size: clamp(0.95rem, 0.6vw + 0.5rem, 1.05rem);
-  }
+th, td {
+  padding: 0.8rem 0.5rem;
+  text-align: center;
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  word-wrap: break-word;
+}
 
-  tr:nth-child(even) { background-color: rgba(255,255,255,0.03); }
-  tr:hover { background-color: rgba(255,184,77,0.1); }
+th:last-child, td:last-child { border-right: none; }
 
-  td.rocket { color: var(--rocket-color); }
-  th.rocket { color: var(--rocket-color); }
-  td.cannon { color: var(--cannon-color); }
-  th.cannon { color: var(--cannon-color); }
+th {
+  font-weight: 600;
+  font-size: clamp(0.95rem, 0.6vw + 0.5rem, 1.05rem);
+}
 
-  footer {
-    text-align: center;
-    color: var(--text-secondary);
-    font-size: clamp(0.9rem, 0.6vw + 0.4rem, 1rem);
-    padding: 2rem 1rem;
-  }
+tr:nth-child(even) { background-color: rgba(255,255,255,0.05); }
+tr:hover { background-color: rgba(255,184,77,0.08); }
 
-  footer a { color: var(--rocket-color); text-decoration: none; }
-  footer a:hover { text-decoration: underline; }
+td.rocket { color: var(--rocket-color); }
+th.rocket { color: var(--rocket-color); }
+td.cannon { color: var(--cannon-color); }
+th.cannon { color: var(--cannon-color); }
+
+footer {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: clamp(0.9rem, 0.6vw + 0.4rem, 1rem);
+  padding: 2rem 1rem;
+}
+
+footer a { color: var(--rocket-color); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
-  <header>
-    <h1>Serious Sam Classic Rocket Jump Records</h1>
-    <p>Balanced dark theme with scannable leaderboard</p>
-    <a class="telegram-link" href="https://t.me/YOUR_CHAT_LINK" target="_blank">Join Telegram</a>
-  </header>
+<header>
+  <h1>Serious Sam Classic Rocket Jump Records</h1>
+  <p>Balanced gray theme with readable leaderboard</p>
+  <a class="telegram-link" href="https://t.me/YOUR_CHAT_LINK" target="_blank">Join Telegram</a>
+</header>
 
-  <div class="definitions">
-    <strong>Definitions:</strong><br>
-    <b>VL</b> = Vertical • <b>VLE</b> = Vertical Express • <b>VIE</b> = Very Important Edge • <b>NVL</b> = Not Vertical
-  </div>
+<div class="definitions">
+  <strong>Definitions:</strong><br>
+  <b>VL</b> = Vertical • <b>VLE</b> = Vertical Express • <b>VIE</b> = Very Important Edge • <b>NVL</b> = Not Vertical
+</div>
 
-  <div class="table-container">
-    <table id="recordsTable">
-      <thead>
-        <tr>
-          <th>Player</th>
-          <th>Country</th>
-          <th class="rocket">Rocket VL</th>
-          <th class="rocket">Rocket VLE</th>
-          <th class="rocket">Rocket VIE</th>
-          <th class="rocket">Rocket NVL</th>
-          <th class="cannon">Cannon VL</th>
-          <th class="cannon">Cannon VLE</th>
-          <th class="cannon">Cannon NVL</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>
+<div class="table-container">
+  <table id="recordsTable">
+    <thead>
+      <tr>
+        <th>Player</th>
+        <th>Country</th>
+        <th class="rocket">Rocket VL</th>
+        <th class="rocket">Rocket VLE</th>
+        <th class="rocket">Rocket VIE</th>
+        <th class="rocket">Rocket NVL</th>
+        <th class="cannon">Cannon VL</th>
+        <th class="cannon">Cannon VLE</th>
+        <th class="cannon">Cannon NVL</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
 
-  <footer>
-    Made by SSC Jumpers • 
-    <a href="https://github.com/YOUR_USERNAME/ssc-rocketjumping" target="_blank">GitHub</a>
-  </footer>
+<footer>
+  Made by SSC Jumpers • 
+  <a href="https://github.com/YOUR_USERNAME/ssc-rocketjumping" target="_blank">GitHub</a>
+</footer>
 
-  <script>
-    const records = [
-      { player: "Andrey", country: "KZ", rocketVL: "58m", rocketVLE: "—", rocketVIE: "62m", rocketNVL: "49m", cannonVL: "75m", cannonVLE: "—", cannonNVL: "68m" },
-      { player: "Sasha", country: "RU", rocketVL: "60m", rocketVLE: "63m", rocketVIE: "—", rocketNVL: "52m", cannonVL: "78m", cannonVLE: "80m", cannonNVL: "70m" }
-    ];
+<script>
+const records = [
+  { player: "Andrey", country: "KZ", rocketVL: "58m", rocketVLE: "—", rocketVIE: "62m", rocketNVL: "49m", cannonVL: "75m", cannonVLE: "—", cannonNVL: "68m" },
+  { player: "Sasha", country: "RU", rocketVL: "60m", rocketVLE: "63m", rocketVIE: "—", rocketNVL: "52m", cannonVL: "78m", cannonVLE: "80m", cannonNVL: "70m" }
+];
 
-    const tbody = document.querySelector("#recordsTable tbody");
-    records.forEach(r => {
-      const row = document.createElement("tr");
-      row.innerHTML = `
-        <td>${r.player}</td>
-        <td>${r.country}</td>
-        <td class="rocket">${r.rocketVL}</td>
-        <td class="rocket">${r.rocketVLE}</td>
-        <td class="rocket">${r.rocketVIE}</td>
-        <td class="rocket">${r.rocketNVL}</td>
-        <td class="cannon">${r.cannonVL}</td>
-        <td class="cannon">${r.cannonVLE}</td>
-        <td class="cannon">${r.cannonNVL}</td>
-      `;
-      tbody.appendChild(row);
-    });
-  </script>
+const tbody = document.querySelector("#recordsTable tbody");
+records.forEach(r => {
+  const row = document.createElement("tr");
+  row.innerHTML = `
+    <td>${r.player}</td>
+    <td>${r.country}</td>
+    <td class="rocket">${r.rocketVL}</td>
+    <td class="rocket">${r.rocketVLE}</td>
+    <td class="rocket">${r.rocketVIE}</td>
+    <td class="rocket">${r.rocketNVL}</td>
+    <td class="cannon">${r.cannonVL}</td>
+    <td class="cannon">${r.cannonVLE}</td>
+    <td class="cannon">${r.cannonNVL}</td>
+  `;
+  tbody.appendChild(row);
+});
+</script>
 </body>
 </html>
