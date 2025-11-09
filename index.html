@@ -87,15 +87,11 @@ thead th {
 }
 
 th:first-child, td:first-child { width:40px; min-width:40px; text-align:center; }
-thead tr:first-child th:first-child {
-  background-color: rgba(100, 100, 100, 0.4);
-  color: #fff;
-}
 th:nth-child(2), td:nth-child(2) { width:220px; min-width:220px; text-align:left; padding-left:1rem; }
 th:nth-child(3), td:nth-child(3) { width:220px; min-width:220px; text-align:left; padding-left:1rem; }
 th:nth-child(n+3):nth-child(-n+9),
 td:nth-child(n+3):nth-child(-n+9) {
-  width: calc((100% - 440px) / 7);
+  width: calc((100% - 480px) / 7);
 }
   
 td {
@@ -130,6 +126,11 @@ tr:nth-child(even) td { background-color: rgba(255,255,255,0.05); }
 #recordsTable thead tr:nth-child(2) th:nth-child(10) { background: rgba(100,200,255,0.15); }
 
 #recordsTable td:hover { cursor: default; }
+
+thead tr:first-child th:first-child {
+  background-color: rgba(100,100,100,0.4);
+  color: #fff;
+}
 
 footer { text-align:center; padding:0.5rem; color: var(--text-secondary); font-size:1rem; }
 footer a { color:#ffa65c; text-decoration:none; }
