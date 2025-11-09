@@ -9,20 +9,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500&display=swap');
 
 :root {
-  --bg-main: #3a3a3a;
-  --bg-accent: rgba(50,50,50,0.95);
+  --bg-main: #2e2e2e;
+  --bg-accent: rgba(40,40,40,0.95);
   --text-main: #e0e0e0;
   --text-secondary: #aaa;
   --border-color: #555;
   --highlight-player: rgba(200,200,200,0.2);
-  --highlight-rocket: rgba(255,184,77,0.25);
-  --highlight-cannon: rgba(150,100,255,0.25);
+  --highlight-rocket: rgba(255,180,90,0.25);
+  --highlight-cannon: rgba(150,120,255,0.25);
 }
 
 body {
   margin: 0;
   font-family: 'Roboto Slab', serif;
-  background-color: var(--bg-main);
+  background: radial-gradient(circle at top, #444 0%, #2b2b2b 60%, #1d1d1d 100%);
   color: var(--text-main);
   display: flex;
   flex-direction: column;
@@ -35,22 +35,36 @@ body::before {
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(rgba(0,0,0,0.15) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,0,0,0.15) 1px, transparent 1px);
-  background-size: 60px 60px;
-  animation: moveGrid 12s linear infinite alternate;
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 80px 80px;
+  animation: moveGrid 16s linear infinite alternate;
   z-index: 0;
   pointer-events: none;
+  opacity: 0.5;
 }
 
 @keyframes moveGrid {
   from { background-position: 0 0; }
-  to { background-position: 60px 60px; }
+  to { background-position: 80px 80px; }
 }
 
-header { text-align:center; padding:1rem 0; z-index:1; }
-header h1 { font-size:2.5rem; color:#ffb84d; margin:0.3rem 0; text-shadow:1px 1px 2px rgba(0,0,0,0.8);}
-header p { color: var(--text-secondary); font-size:1.2rem; margin:0.2rem 0; }
+header {
+  text-align:center;
+  padding:1.2rem 0;
+  z-index:1;
+}
+header h1 {
+  font-size:2.5rem;
+  color:#ffb84d;
+  margin:0.3rem 0;
+  text-shadow:1px 1px 2px rgba(0,0,0,0.8);
+}
+header p {
+  color: var(--text-secondary);
+  font-size:1.2rem;
+  margin:0.2rem 0;
+}
 
 .definitions {
   background: var(--bg-accent);
@@ -67,17 +81,21 @@ header p { color: var(--text-secondary); font-size:1.2rem; margin:0.2rem 0; }
 .table-container {
   position: relative;
   z-index: 1;
-  max-width:1600px;
+  max-width:1700px;
   width:90%;
   margin:1rem auto;
   overflow:auto;
   background: var(--bg-accent);
   border-radius:10px;
   border:1px solid var(--border-color);
-  box-shadow:0 4px 15px rgba(0,0,0,0.2);
+  box-shadow:0 4px 15px rgba(0,0,0,0.25);
 }
 
-table { border-collapse:collapse; width:100%; table-layout: fixed; }
+table {
+  border-collapse:collapse;
+  width:100%;
+  table-layout: fixed;
+}
 thead th {
   border-right:1px solid var(--border-color);
   border-bottom:1px solid var(--border-color);
@@ -86,13 +104,27 @@ thead th {
   font-size:2.3rem;
 }
 
-th:first-child, td:first-child { width:40px; min-width:40px; text-align:center; }
-th:nth-child(2), td:nth-child(2) { width:220px; min-width:220px; text-align:left; padding-left:1rem; }
-th:nth-child(3), td:nth-child(3) { width:220px; min-width:220px; text-align:left; padding-left:1rem; }
-th:nth-child(n+3):nth-child(-n+9),
-td:nth-child(n+3):nth-child(-n+9) {
-th:nth-child(n+4), td:nth-child(n+4) { width:160px; min-width:160px; }
-  
+th:first-child, td:first-child {
+  width:60px;
+  min-width:60px;
+  text-align:center;
+  background: rgba(200,200,200,0.12);
+}
+
+th:nth-child(2), td:nth-child(2),
+th:nth-child(3), td:nth-child(3) {
+  width:220px;
+  min-width:220px;
+  text-align:left;
+  padding-left:1rem;
+}
+
+th:nth-child(n+4):nth-child(-n+10),
+td:nth-child(n+4):nth-child(-n+10) {
+  width:calc((100% - 500px) / 7);
+  min-width:140px;
+}
+
 td {
   padding:1rem 0.5rem;
   text-align:center;
@@ -102,31 +134,35 @@ td {
   word-wrap:break-word;
   text-shadow:1px 1px 2px rgba(0,0,0,0.7);
   overflow:hidden;
-  transition: background-color 0.20s ease;
+  transition: background-color 0.25s ease;
 }
-td:nth-child(3) { text-align:left; padding-left:1rem; }
+td:nth-child(3) { text-align:left; }
 
 th:last-child, td:last-child { border-right:none; }
 tr:nth-child(even) td { background-color: rgba(255,255,255,0.05); }
+
 #recordsTable thead tr th { text-align:center; font-size:2.3rem; }
 
-#recordsTable thead tr:nth-child(1) th { background: rgba(45,45,45,0.95); }
-#recordsTable thead tr:nth-child(2) th:nth-child(1) { background: rgba(200,200,200,0.15); }
-#recordsTable thead tr:nth-child(2) th:nth-child(2) { background: rgba(200,200,200,0.15); }
+#recordsTable thead tr:nth-child(1) th { background: rgba(60,60,60,0.95); }
+#recordsTable thead tr:nth-child(2) th:nth-child(1),
+#recordsTable thead tr:nth-child(2) th:nth-child(2),
 #recordsTable thead tr:nth-child(2) th:nth-child(3) { background: rgba(200,200,200,0.15); }
-
 #recordsTable thead tr:nth-child(2) th:nth-child(4),
 #recordsTable thead tr:nth-child(2) th:nth-child(5),
 #recordsTable thead tr:nth-child(2) th:nth-child(6),
 #recordsTable thead tr:nth-child(2) th:nth-child(7) { background: rgba(255,165,0,0.15); }
-
 #recordsTable thead tr:nth-child(2) th:nth-child(8),
 #recordsTable thead tr:nth-child(2) th:nth-child(9),
 #recordsTable thead tr:nth-child(2) th:nth-child(10) { background: rgba(100,200,255,0.15); }
 
 #recordsTable td:hover { cursor: default; }
 
-footer { text-align:center; padding:0.5rem; color: var(--text-secondary); font-size:1rem; }
+footer {
+  text-align:center;
+  padding:0.8rem;
+  color: var(--text-secondary);
+  font-size:1rem;
+}
 footer a { color:#ffa65c; text-decoration:none; }
 footer a:hover { text-decoration:underline; }
 </style>
@@ -181,7 +217,7 @@ const records = [
   { player: "Meteor", country: "Germany", rocketVL: "34", rocketVLE: "36", rocketVIE: "32", rocketNVL: "-", cannonVL: "42", cannonVLE: "42", cannonNVL: "54" }
 ];
 
-const rocketRanges = { VL:[-12,35], VLE:[-12,36], VIE:[-12,34], NVL:[-12,40] };
+const rocketRanges = { VL:[23,35], VLE:[24,36], VIE:[22,34], NVL:[28,40] };
 const cannonRanges = { VL:[32,53], VLE:[32,55], NVL:[32,56] };
 
 function getRocketColor(value, type){
@@ -189,25 +225,9 @@ function getRocketColor(value, type){
   const v = parseFloat(value);
   const [min, max] = rocketRanges[type] || [-12,40];
   if (isNaN(v)) return "#aaa";
-
-  const baseRatio = (v - min) / (max - min);
-  const ratio = Math.max(0, Math.min(1, baseRatio));
-
-  const rBase = 255;
-  const gBase = Math.round(200 - 120 * ratio);
-  const bBase = Math.round(80 - 20 * ratio);
-
-  let r = rBase;
-  let g = gBase;
-  let b = bBase;
-
-  if (v > max) {
-    const extra = Math.min(4, v - max);
-    r = Math.min(255, r + Math.round(12 * extra));
-    g = Math.max(0, g - Math.round(30 * extra));
-    b = Math.min(255, b + Math.round(45 * extra));
-  }
-
+  const ratio = Math.max(0, Math.min(1, (v - min) / (max - min)));
+  let r = 255, g = Math.round(200 - 120 * ratio), b = Math.round(80 - 20 * ratio);
+  if (v > max) { const extra = Math.min(4, v - max); r += 12*extra; g -= 30*extra; b += 45*extra; }
   return `rgb(${r},${Math.max(0,g)},${Math.min(255,b)})`;
 }
 
@@ -216,25 +236,11 @@ function getCannonColor(value, type){
   const v = parseFloat(value);
   const [min, max] = cannonRanges[type] || [32,56];
   if (isNaN(v)) return "#aaa";
-
-  const baseRatio = (v - min) / (max - min);
-  const ratio = Math.max(0, Math.min(1, baseRatio));
-
-  const rBase = Math.round(0 + 120 * ratio);
-  const gBase = Math.round(180 - 60 * ratio);
-  const bBase = Math.round(180 + 75 * ratio);
-
-  let r = rBase;
-  let g = gBase;
-  let b = bBase;
-
-  if (v > max) {
-    const extra = Math.min(4, v - max);
-    r = Math.min(255, r + Math.round(30 * extra));
-    g = Math.max(0, g - Math.round(40 * extra));
-    b = Math.min(255, b + Math.round(12 * extra));
-  }
-
+  const ratio = Math.max(0, Math.min(1, (v - min) / (max - min)));
+  let r = Math.round(0 + 120 * ratio),
+      g = Math.round(180 - 60 * ratio),
+      b = Math.round(180 + 75 * ratio);
+  if (v > max) { const extra = Math.min(4, v - max); r += 30*extra; g -= 40*extra; b += 12*extra; }
   return `rgb(${Math.min(255,r)},${Math.max(0,g)},${Math.min(255,b)})`;
 }
 
@@ -271,29 +277,26 @@ records.forEach((r,index)=>{
 });
 
 const table = document.getElementById('recordsTable');
-function attachHover() {
-  const cells = table.querySelectorAll('tbody td');
-  cells.forEach(cell=>{
-    cell.addEventListener('mouseenter', ()=>{
-      const colIndex = cell.cellIndex;
-      const row = cell.parentElement;
-      let glowColor = cell.classList.contains('cannon') ? 'var(--highlight-cannon)' :
-                      cell.classList.contains('rocket') ? 'var(--highlight-rocket)' : 'var(--highlight-player)';
-      row.querySelectorAll('td').forEach(td=>td.style.backgroundColor=glowColor);
-      table.querySelectorAll('tbody tr').forEach(tr=>{
-        if(tr.children[colIndex]) tr.children[colIndex].style.backgroundColor = glowColor;
-      });
-    });
-    cell.addEventListener('mouseleave', ()=>{
-      const colIndex = cell.cellIndex;
-      table.querySelectorAll('tbody tr').forEach(tr=>{
-        if(tr.children[colIndex]) tr.children[colIndex].style.backgroundColor = '';
-      });
-      cell.parentElement.querySelectorAll('td').forEach(td=>td.style.backgroundColor='');
+table.querySelectorAll('tbody td').forEach(cell=>{
+  cell.addEventListener('mouseenter', ()=>{
+    const col = cell.cellIndex;
+    const row = cell.parentElement;
+    const glow = cell.classList.contains('cannon') ? 'var(--highlight-cannon)' :
+                 cell.classList.contains('rocket') ? 'var(--highlight-rocket)' :
+                 'var(--highlight-player)';
+    row.querySelectorAll('td').forEach(td=>td.style.backgroundColor=glow);
+    table.querySelectorAll('tbody tr').forEach(tr=>{
+      if(tr.children[col]) tr.children[col].style.backgroundColor = glow;
     });
   });
-}
-attachHover();
+  cell.addEventListener('mouseleave', ()=>{
+    const col = cell.cellIndex;
+    table.querySelectorAll('tbody tr').forEach(tr=>{
+      if(tr.children[col]) tr.children[col].style.backgroundColor = '';
+    });
+    cell.parentElement.querySelectorAll('td').forEach(td=>td.style.backgroundColor='');
+  });
+});
 </script>
 </body>
 </html>
