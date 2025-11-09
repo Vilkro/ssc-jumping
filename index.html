@@ -40,8 +40,7 @@ body::before {
     linear-gradient(rgba(0,0,0,0.15) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0,0,0,0.15) 1px, transparent 1px);
   background-size: 60px 60px;
-  animation: moveGrid 12s linear infinite;
-  z-index: 0;
+  animation: moveGrid 20s linear infinite;
 }
 
 @keyframes moveGrid {
@@ -110,6 +109,16 @@ td {
 th:last-child, td:last-child { border-right:none; }
 tr:nth-child(even) td { background-color: rgba(255,255,255,0.05); }
 
+/* Center all cells in the first two header rows */
+#recordsTable thead tr th {
+    text-align: center;
+}
+
+#recordsTable thead tr:nth-child(1) th,
+#recordsTable thead tr:nth-child(2) th {
+    text-align: center;
+}
+
 footer { text-align:center; padding:0.5rem; color: var(--text-secondary); font-size:1rem; }
 footer a { color:#ffa65c; text-decoration:none; }
 footer a:hover { text-decoration:underline; }
@@ -154,11 +163,11 @@ footer a:hover { text-decoration:underline; }
 
 <script>
 const records = [
-  { player: "Mask", country: "Russia", rocketVL: "36", rocketVLE: "38", rocketVIE: "35", rocketNVL: "42", cannonVL: "53", cannonVLE: "48", cannonNVL: "48" },
+  { player: "Mask", country: "Russia", rocketVL: "36", rocketVLE: "38", rocketVIE: "35", rocketNVL: "42", cannonVL: "53", cannonVLE: "48", cannonNVL: "52" },
   { player: "Val", country: "Kazakhstan", rocketVL: "32", rocketVLE: "36", rocketVIE: "32", rocketNVL: "40", cannonVL: "54", cannonVLE: "56", cannonNVL: "58" },
   { player: "Dark", country: "Russia", rocketVL: "37", rocketVLE: "36", rocketVIE: "32", rocketNVL: "40", cannonVL: "56", cannonVLE: "56", cannonNVL: "57" },
   { player: "Devon lol", country: "Russia", rocketVL: "37", rocketVLE: "36", rocketVIE: "34", rocketNVL: "41", cannonVL: "56", cannonVLE: "56", cannonNVL: "56" },
-  { player: "Meteor", country: "Germany", rocketVL: "34", rocketVLE: "36", rocketVIE: "32", rocketNVL: "-", cannonVL: "-", cannonVLE: "-", cannonNVL: "54" }
+  { player: "Meteor", country: "Germany", rocketVL: "34", rocketVLE: "36", rocketVIE: "32", rocketNVL: "-", cannonVL: "42", cannonVLE: "42", cannonNVL: "54" }
 ];
 
 function getRocketColor(value,type){
@@ -174,7 +183,7 @@ function getRocketColor(value,type){
 function getCannonColor(value){
   if(value==="—" || value==="-" ) return "#aaa";
   const val=parseInt(value);
-  const min=40,max=58;
+  const min=48,max=58;
   const ratio=Math.min(1,Math.max(0,(val-min)/(max-min)));
   const r = Math.floor(0+150*ratio);
   const g = Math.floor(150-50*ratio); 
