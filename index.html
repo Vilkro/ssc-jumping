@@ -121,7 +121,7 @@ footer a:hover { text-decoration:underline; }
 </head>
 <body>
 <header>
-<h1>Serious Sam Classic Rocket Jump Records</h1>
+<h1>Rocket Jump Records in Serious Sam Classic</h1>
 <p>Detailed jumping records table for jumpers. To apply, join the <a href="https://t.me/Serious_Sam_Hyper_Server" target="_blank" style="color:#ffa65c;">Telegram Channel</a>.</p>
 </header>
 
@@ -134,12 +134,12 @@ footer a:hover { text-decoration:underline; }
 <table id="recordsTable">
 <thead>
 <tr>
-  <th colspan="2" style="background: rgba(200,200,200,0.15);">Player Info</th>
-  <th colspan="4" style="background: rgba(255,165,0,0.15);">Rocket</th>
-  <th colspan="3" style="background: rgba(100,200,255,0.15);">Cannon</th>
+  <th colspan="2" style="background: rgba(200,200,200,0.15);">Player info</th>
+  <th colspan="4" style="background: rgba(255,165,0,0.15);">Rockets only</th>
+  <th colspan="3" style="background: rgba(100,200,255,0.15);">Cannon and rockets</th>
 </tr>
 <tr>
-  <th>Player</th>
+  <th>Name</th>
   <th>Country</th>
   <th>VL</th>
   <th>VLE</th>
@@ -154,11 +154,13 @@ footer a:hover { text-decoration:underline; }
 </table>
 </div>
 
-<footer>Made by SSC Jumpers</footer>
+<footer>Made by labubu</footer>
 
 <script>
 const records = [
   { player: "Andrey", country: "KZ", rocketVL: "32", rocketVLE: "35", rocketVIE: "39", rocketNVL: "36", cannonVL: "40", cannonVLE: "50", cannonNVL: "56" },
+  { player: "Mask", country: "Russia", rocketVL: "36", rocketVLE: "38", rocketVIE: "35", rocketNVL: "42", cannonVL: "53", cannonVLE: "48", cannonNVL: "48" },
+  { player: "Val", country: "Kazakhstan", rocketVL: "32", rocketVLE: "36", rocketVIE: "32", rocketNVL: "40", cannonVL: "54", cannonVLE: "56", cannonNVL: "58" },
   { player: "Sasha", country: "RU", rocketVL: "37", rocketVLE: "38", rocketVIE: "—", rocketNVL: "42", cannonVL: "56", cannonVLE: "54", cannonNVL: "58" }
 ];
 
@@ -174,9 +176,9 @@ function getRocketColor(value,type){
 function getCannonColor(value){
   if(value==="—") return "#aaa";
   const val=parseInt(value);
-  const min=32,max=58;
+  const min=38,max=58;
   const ratio=Math.min(1,Math.max(0,(val-min)/(max-min)));
-  const r=Math.floor(170*(1-ratio)), g=Math.floor(235*(1-ratio)), b=255;
+  const r=Math.floor(222*(1-ratio)), g=190, b=255;
   return `rgb(${r},${g},${b})`;
 }
 
