@@ -5,55 +5,112 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Serious Sam Rocket Jump Records</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500&display=swap');
 
+    /* ===== GENERAL LAYOUT ===== */
     body {
       margin: 0;
-      font-family: 'Orbitron', sans-serif;
-      background: radial-gradient(circle at center, #121212 0%, #000000 100%);
-      color: #f8f8f8;
+      font-family: 'Rajdhani', sans-serif;
+      background-color: #0a0a0a;
+      color: #f0f0f0;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
+      overflow-x: hidden;
     }
 
+    /* ===== BACKGROUND PATTERN ===== */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(rgba(255, 140, 0, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 140, 0, 0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: moveGrid 15s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes moveGrid {
+      0% { background-position: 0 0, 0 0; }
+      100% { background-position: 40px 40px, 40px 40px; }
+    }
+
+    header, footer, table, .definitions {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== HEADER ===== */
     header {
       text-align: center;
-      padding: 2rem 1rem;
+      padding: 2rem 1rem 1rem;
     }
 
     header h1 {
-      font-size: 2.2rem;
-      color: #ff8c00;
-      text-shadow: 0 0 10px #ff8c00;
+      font-size: 2.5rem;
+      color: #ffa733;
+      text-shadow: 0 0 15px rgba(255, 140, 0, 0.6);
+      letter-spacing: 2px;
+      margin-bottom: 0.4rem;
     }
 
     header p {
-      font-size: 1rem;
-      color: #ccc;
+      color: #cfcfcf;
+      font-size: 1.1rem;
+      margin-top: 0;
     }
 
+    /* ===== TELEGRAM BUTTON ===== */
+    .telegram-link {
+      display: inline-block;
+      margin-top: 1rem;
+      background: linear-gradient(90deg, #ff8c00, #ffcc33);
+      color: #000;
+      padding: 0.8rem 1.6rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .telegram-link:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255, 140, 0, 0.8);
+    }
+
+    /* ===== TABLE ===== */
     table {
       border-collapse: collapse;
-      width: 90%;
-      max-width: 1000px;
-      margin-bottom: 2rem;
-      background-color: rgba(20, 20, 20, 0.85);
-      box-shadow: 0 0 20px rgba(255, 140, 0, 0.3);
+      width: 92%;
+      max-width: 1050px;
+      margin: 2rem 0;
+      background-color: rgba(25, 25, 25, 0.9);
+      box-shadow: 0 0 25px rgba(255, 140, 0, 0.2);
+      border: 1px solid rgba(255, 140, 0, 0.2);
     }
 
     th, td {
-      border: 1px solid #333;
-      padding: 0.6rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 0.7rem;
       text-align: center;
     }
 
     th {
-      background-color: #1a1a1a;
+      background: linear-gradient(90deg, #1a1a1a, #262626);
       color: #ffb84d;
       text-transform: uppercase;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+    }
+
+    td {
+      font-size: 0.95rem;
+      color: #e8e8e8;
     }
 
     tr:nth-child(even) {
@@ -61,59 +118,58 @@
     }
 
     tr:hover {
-      background-color: rgba(255, 140, 0, 0.15);
+      background-color: rgba(255, 140, 0, 0.1);
     }
 
+    /* ===== DEFINITIONS BOX ===== */
+    .definitions {
+      font-size: 0.95rem;
+      background-color: rgba(30, 30, 30, 0.8);
+      border: 1px solid rgba(255, 140, 0, 0.3);
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      max-width: 650px;
+      margin: 1rem auto 2rem;
+      line-height: 1.5;
+      box-shadow: 0 0 10px rgba(255, 140, 0, 0.2);
+    }
+
+    .definitions strong {
+      color: #ffb84d;
+    }
+
+    /* ===== FOOTER ===== */
     footer {
       text-align: center;
       font-size: 0.85rem;
-      color: #999;
+      color: #aaa;
+      padding: 1rem;
       margin-top: auto;
-      padding: 1rem;
     }
 
-    .definitions {
-      font-size: 0.9rem;
-      background-color: rgba(40, 40, 40, 0.7);
-      border: 1px solid #333;
-      padding: 1rem;
-      border-radius: 10px;
-      max-width: 600px;
-      margin: 1rem auto 2rem;
-      line-height: 1.4;
-    }
-
-    .telegram-link {
-      display: inline-block;
-      margin-top: 1rem;
-      background-color: #ff8c00;
-      color: black;
-      padding: 0.7rem 1.5rem;
-      border-radius: 6px;
+    footer a {
+      color: #ff8c00;
       text-decoration: none;
-      font-weight: bold;
-      transition: 0.2s;
     }
 
-    .telegram-link:hover {
-      background-color: #ffa733;
-      box-shadow: 0 0 10px #ffb84d;
+    footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
   <header>
     <h1>Serious Sam Classic Rocket Jump Records</h1>
-    <p>Community leaderboard for advanced rocket jumping</p>
-    <a class="telegram-link" href="https://t.me/Serious_Sam_Hyper_Server" target="_blank">Join Telegram</a>
+    <p>Reviving the art of explosive movement</p>
+    <a class="telegram-link" href="https://t.me/YOUR_CHAT_LINK" target="_blank">Join Telegram</a>
   </header>
 
   <div class="definitions">
     <strong>Definitions:</strong><br>
-    VL = Vertical<br>
-    VLE = Vertical Express<br>
-    VIE = Very Important Edge<br>
-    NVL = Not Vertical
+    <b>VL</b> = Vertical<br>
+    <b>VLE</b> = Vertical Express<br>
+    <b>VIE</b> = Very Important Edge<br>
+    <b>NVL</b> = Not Vertical
   </div>
 
   <table id="recordsTable">
@@ -131,12 +187,13 @@
       </tr>
     </thead>
     <tbody>
-      <!-- Records will load here -->
+      <!-- Records will be loaded by script -->
     </tbody>
   </table>
 
   <footer>
-    Made by the SSC Jumpers • <a href="https://github.com/Vilkro/ssc-rocketjumping" style="color:#ff8c00;">GitHub</a>
+    Made by the SSC Jumpers • 
+    <a href="https://github.com/YOUR_USERNAME/ssc-rocketjumping" target="_blank">GitHub</a>
   </footer>
 
   <script>
@@ -166,7 +223,6 @@
     ];
 
     const tbody = document.querySelector("#recordsTable tbody");
-
     records.forEach(r => {
       const row = document.createElement("tr");
       row.innerHTML = `
