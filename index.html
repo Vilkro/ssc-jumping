@@ -128,7 +128,7 @@ footer a:hover { text-decoration:underline; }
 </table>
 </div>
 
-<footer>hog riders</footer>
+<footer>hog riders sorted by sum of all values</footer>
 
 <script>
 const records = [
@@ -154,10 +154,10 @@ function getCannonColor(value,type){
   const val=parseInt(value);
   let min,max;
   switch(type){
-    case "VL": min = 46; max = 56; break;
-    case "VLE": min = 46; max = 57; break;
-    case "NVL": min = 48; max = 58; break;
-    default: min = 48; max = 58;
+    case "VL": min = 44; max = 56; break;
+    case "VLE": min = 45; max = 57; break;
+    case "NVL": min = 46; max = 58; break;
+    default: min = 44; max = 58;
   }
   const ratio=Math.min(1,Math.max(0,(val-min)/(max-min)));
   const r = Math.floor(120*ratio);
