@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SSC Rocket Jump Records</title>
+
+<!-- Favicon / tab icon -->
+<link rel="icon" type="image/png" href="icon.png"> <!-- place your icon file in the same folder -->
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500&display=swap');
 
@@ -100,8 +104,11 @@ thead {
 
 /* Group header row */
 thead tr.group th {
+  border: none;
+  text-align: center;
+  font-weight: 600;
   font-size: 1.4rem;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+  padding: 0.8rem 0;
 }
 
 thead tr.group th:nth-child(1),
@@ -115,6 +122,15 @@ thead tr.group th:nth-child(n+3):nth-child(-n+6) {
 
 thead tr.group th:nth-child(n+7):nth-child(-n+9) {
   background: rgba(100,200,255,0.15); /* blue for Cannon */
+}
+
+/* Column headers */
+thead tr:not(.group) th {
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  text-align: center;
+  background: rgba(45,45,45,0.95);
+  z-index: 2;
 }
 
 th, td {
@@ -145,7 +161,7 @@ th {
   font-weight: 600;
 }
 
-tr:nth-child(even) { background-color: rgba(255,255,255,0.05); }
+tr:nth-child(even) td { background-color: rgba(255,255,255,0.05); }
 
 /* Glow highlight for row + column hover */
 .highlighted {
@@ -160,7 +176,6 @@ footer {
 }
 footer a { color: #ffa65c; text-decoration: none; }
 footer a:hover { text-decoration: underline; }
-
 </style>
 </head>
 <body>
@@ -254,14 +269,15 @@ records.forEach(r=>{
   tbody.appendChild(row);
 });
 
+// Hover glow
 const table = document.getElementById('recordsTable');
-const cells = table.querySelectorAll('td');
+const cells = table.querySelectorAll('tbody td'); // only tbody cells
 cells.forEach(cell => {
   cell.addEventListener('mouseenter', () => {
     const colIndex = cell.cellIndex;
     const row = cell.parentElement;
     row.classList.add('highlighted');
-    table.querySelectorAll('tr').forEach(tr => {
+    table.querySelectorAll('tbody tr').forEach(tr => {
       if(tr.children[colIndex]) tr.children[colIndex].classList.add('highlighted');
     });
   });
@@ -269,7 +285,7 @@ cells.forEach(cell => {
     const colIndex = cell.cellIndex;
     const row = cell.parentElement;
     row.classList.remove('highlighted');
-    table.querySelectorAll('tr').forEach(tr => {
+    table.querySelectorAll('tbody tr').forEach(tr => {
       if(tr.children[colIndex]) tr.children[colIndex].classList.remove('highlighted');
     });
   });
