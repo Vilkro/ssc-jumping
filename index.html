@@ -137,6 +137,7 @@ footer a:hover { text-decoration:underline; }
 </tr>
 <tr>
   <th>#</th>
+  <th>Name</th>
   <th>Country</th>
   <th>VL</th>
   <th>VLE</th>
@@ -162,8 +163,8 @@ const records = [
   { player: "Meteor", country: "Germany", rocketVL: "34", rocketVLE: "36", rocketVIE: "32", rocketNVL: "-", cannonVL: "42", cannonVLE: "42", cannonNVL: "54" }
 ];
 
-const rocketRanges = { VL:[-12,35], VLE:[-12,36], VIE:[-12,34], NVL:[-12,40] };
-const cannonRanges = { VL:[-13,53], VLE:[-13,55], NVL:[-13,56] };
+const rocketRanges = { VL:[23,35], VLE:[24,36], VIE:[22,34], NVL:[28,40] };
+const cannonRanges = { VL:[40,53], VLE:[42,55], NVL:[43,56] };
 
 function getRocketColor(value,type){
   if(value==="—" || value==="-" ) return "#aaa";
