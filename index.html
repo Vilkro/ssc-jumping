@@ -78,44 +78,28 @@ header p {
 }
 .definitions strong { color: #ffa65c; }
 
-.legend {
-  background: var(--bg-accent);
-  padding: 0.7rem 1.2rem;
-  border-radius: 10px;
-  margin: 0.5rem auto 1rem auto;
-  font-size: 1rem;
-  max-width: 700px;
-  line-height: 1.5;
-  text-shadow: 1px 1px 1px rgba(0,0,0,0.6);
-}
-
-.legend-row {
-  display: flex;
+.legend-inline {
+  display: inline-flex;
   align-items: center;
-  margin-top: 0.5rem;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  font-size: 1rem;
 }
 
-.legend-label {
-  width: 70px;
-  text-align: left;
-  color: var(--text-main);
-  font-weight: 500;
-}
-
-.legend-bar {
-  flex: 1;
-  height: 20px;
-  margin-left: 10px;
-  border-radius: 5px;
+.legend-color {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
   border: 1px solid var(--border-color);
+  vertical-align: middle;
 }
 
-.rocket-low { background: linear-gradient(to right, #ffc966, #ff7f50); }
-.rocket-high { background: linear-gradient(to right, #ff7f50, #ff66cc); }
+.rocket-easy { background: #ffc966; }
+.rocket-hard { background: #ff66cc; }
 
-.cannon-low { background: linear-gradient(to right, #80ffff, #3399ff); }
-.cannon-high { background: linear-gradient(to right, #3399ff, #cc66ff); }
-
+.cannon-easy { background: #80ffff; }
+.cannon-hard { background: #cc66ff; }
 
 .table-container {
   position: relative;
@@ -216,20 +200,12 @@ footer a:hover { text-decoration:underline; }
 <div class="definitions">
 <strong>Definitions:</strong><br>
 <b>VL</b> = Vertical • <b>VLE</b> = Vertical Express • <b>VIE</b> = Very Important Edge • <b>NVL</b> = Not Vertical
+<strong>Difficulty:</strong>
+  <span class="legend-inline">
+    Rocket: <span class="legend-color rocket-easy"></span> Easy <span class="legend-color rocket-hard"></span> Hard,
+    Cannon: <span class="legend-color cannon-easy"></span> Easy <span class="legend-color cannon-hard"></span> Hard
+  </span>
 </div>
-
-<div class="legend">
-  <strong>Jump Color Legend:</strong>
-  <div class="legend-row">
-    <span class="legend-label">Rocket:</span>
-    <span class="legend-bar rocket-low"></span>
-    <span class="legend-bar rocket-high"></span>
-  </div>
-  <div class="legend-row">
-    <span class="legend-label">Cannon:</span>
-    <span class="legend-bar cannon-low"></span>
-    <span class="legend-bar cannon-high"></span>
-  </div>
 </div>
   
 <div class="table-container">
