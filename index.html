@@ -5,192 +5,166 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Serious Sam Rocket Jump Records</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600&display=swap');
 
-    /* ===== GENERAL LAYOUT ===== */
+    :root {
+      --bg-main: #f3f3f3;
+      --bg-accent: #ffffffb8;
+      --text-main: #222;
+      --text-secondary: #555;
+      --rocket-color: #e85c0d;
+      --cannon-color: #2a82e4;
+      --table-border: #ccc;
+    }
+
     body {
       margin: 0;
-      font-family: 'Rajdhani', sans-serif;
-      background-color: #0a0a0a;
-      color: #f0f0f0;
+      font-family: 'Exo 2', sans-serif;
+      color: var(--text-main);
+      background: radial-gradient(circle at top right, #fefefe, #e9e9e9);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       overflow-x: hidden;
+      padding: 0 1rem;
     }
 
-    /* ===== BACKGROUND PATTERN ===== */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background-image:
-        linear-gradient(rgba(255, 140, 0, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 140, 0, 0.05) 1px, transparent 1px);
-      background-size: 40px 40px;
-      animation: moveGrid 15s linear infinite;
-      z-index: 0;
-    }
-
-    @keyframes moveGrid {
-      0% { background-position: 0 0, 0 0; }
-      100% { background-position: 40px 40px, 40px 40px; }
-    }
-
-    header, footer, table, .definitions {
-      position: relative;
-      z-index: 1;
-    }
-
-    /* ===== HEADER ===== */
     header {
       text-align: center;
-      padding: 2.5rem 1rem 1.5rem;
+      padding: 2rem 1rem 1rem;
     }
 
     header h1 {
-      font-size: 2.8rem;
-      color: #ffa733;
-      text-shadow: 0 0 15px rgba(255, 140, 0, 0.6);
-      letter-spacing: 2px;
-      margin-bottom: 0.4rem;
+      font-size: clamp(2rem, 2vw + 1rem, 3.2rem);
+      background: linear-gradient(90deg, #e85c0d, #2a82e4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.3rem;
     }
 
     header p {
-      color: #cfcfcf;
-      font-size: 1.2rem;
-      margin-top: 0;
+      font-size: clamp(1rem, 0.8vw + 0.6rem, 1.3rem);
+      color: var(--text-secondary);
     }
 
-    /* ===== TELEGRAM BUTTON ===== */
     .telegram-link {
       display: inline-block;
       margin-top: 1rem;
-      background: linear-gradient(90deg, #ff8c00, #ffcc33);
-      color: #000;
-      padding: 0.9rem 1.8rem;
-      border-radius: 8px;
+      background: linear-gradient(90deg, #e85c0d, #f0b90b);
+      color: #fff;
+      padding: 0.8rem 1.6rem;
+      border-radius: 10px;
       text-decoration: none;
       font-weight: 600;
+      font-size: 1rem;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
       transition: transform 0.2s, box-shadow 0.2s;
-      font-size: 1.05rem;
     }
 
     .telegram-link:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(255, 140, 0, 0.8);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.25);
     }
 
-    /* ===== TABLE ===== */
-    table {
-      border-collapse: collapse;
-      width: 92%;
-      max-width: 1100px;
-      margin: 2rem 0;
-      background-color: rgba(25, 25, 25, 0.9);
-      box-shadow: 0 0 25px rgba(255, 140, 0, 0.2);
-      border: 1px solid rgba(255, 140, 0, 0.2);
-      font-size: 1.05rem;
-    }
-
-    th, td {
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 0.8rem;
-      text-align: center;
-    }
-
-    th {
-      background: linear-gradient(90deg, #1a1a1a, #262626);
-      color: #ffb84d;
-      text-transform: uppercase;
-      font-size: 0.95rem;
-      letter-spacing: 0.5px;
-    }
-
-    td {
-      color: #e8e8e8;
-      transition: background 0.2s;
-    }
-
-    tr:nth-child(even) {
-      background-color: rgba(255, 255, 255, 0.03);
-    }
-
-    tr:hover {
-      background-color: rgba(255, 140, 0, 0.08);
-    }
-
-    /* ===== COLOR CODING ===== */
-    td.rocket {
-      color: #ffae4d;
-      background-color: rgba(255, 140, 0, 0.05);
-    }
-
-    td.cannon {
-      color: #73cfff;
-      background-color: rgba(100, 180, 255, 0.04);
-    }
-
-    th.rocket {
-      color: #ffb84d;
-    }
-
-    th.cannon {
-      color: #90d6ff;
-    }
-
-    /* ===== DEFINITIONS BOX ===== */
     .definitions {
-      font-size: 1rem;
-      background-color: rgba(30, 30, 30, 0.8);
-      border: 1px solid rgba(255, 140, 0, 0.3);
+      background: var(--bg-accent);
       padding: 1rem 1.5rem;
       border-radius: 10px;
-      max-width: 650px;
-      margin: 1rem auto 2rem;
-      line-height: 1.5;
-      box-shadow: 0 0 10px rgba(255, 140, 0, 0.2);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      margin: 1.5rem auto;
+      font-size: clamp(0.95rem, 0.6vw + 0.5rem, 1.1rem);
+      max-width: 700px;
     }
 
     .definitions strong {
-      color: #ffb84d;
+      color: var(--rocket-color);
     }
 
-    /* ===== FOOTER ===== */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 1200px;
+      margin: 2rem 0;
+      background: var(--bg-accent);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      font-size: clamp(0.95rem, 0.7vw + 0.5rem, 1.2rem);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 0.9rem 0.6rem;
+      text-align: center;
+      border-bottom: 1px solid var(--table-border);
+    }
+
+    th {
+      background: #f6f6f6;
+      font-weight: 600;
+    }
+
+    tr:nth-child(even) {
+      background: rgba(0, 0, 0, 0.03);
+    }
+
+    tr:hover {
+      background: rgba(0,0,0,0.06);
+      transition: background 0.2s;
+    }
+
+    th.rocket, td.rocket {
+      color: var(--rocket-color);
+    }
+
+    th.cannon, td.cannon {
+      color: var(--cannon-color);
+    }
+
     footer {
       text-align: center;
-      font-size: 0.95rem;
-      color: #aaa;
-      padding: 1.5rem;
-      margin-top: auto;
+      color: var(--text-secondary);
+      font-size: clamp(0.9rem, 0.6vw + 0.4rem, 1rem);
+      padding: 2rem 1rem;
     }
 
     footer a {
-      color: #ff8c00;
+      color: var(--rocket-color);
       text-decoration: none;
     }
 
     footer a:hover {
       text-decoration: underline;
     }
+
+    /* Subtle animated background pattern */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 1px 1px, rgba(0,0,0,0.05) 1px, transparent 0);
+      background-size: 40px 40px;
+      z-index: 0;
+      animation: subtleMove 20s linear infinite;
+    }
+
+    @keyframes subtleMove {
+      from { background-position: 0 0; }
+      to { background-position: 40px 40px; }
+    }
   </style>
 </head>
 <body>
   <header>
     <h1>Serious Sam Classic Rocket Jump Records</h1>
-    <p>Reviving the art of explosive movement</p>
+    <p>Explosive Movement Meets Style</p>
     <a class="telegram-link" href="https://t.me/YOUR_CHAT_LINK" target="_blank">Join Telegram</a>
   </header>
 
   <div class="definitions">
     <strong>Definitions:</strong><br>
-    <b>VL</b> = Vertical<br>
-    <b>VLE</b> = Vertical Express<br>
-    <b>VIE</b> = Very Important Edge<br>
-    <b>NVL</b> = Not Vertical
+    <b>VL</b> = Vertical • <b>VLE</b> = Vertical Express • <b>VIE</b> = Very Important Edge • <b>NVL</b> = Not Vertical
   </div>
 
   <table id="recordsTable">
@@ -198,18 +172,16 @@
       <tr>
         <th>Player</th>
         <th>Country</th>
-        <th class="rocket">Rocket VL</th>
+        <th class="rocket">🚀 Rocket VL</th>
         <th class="rocket">Rocket VLE</th>
         <th class="rocket">Rocket VIE</th>
         <th class="rocket">Rocket NVL</th>
-        <th class="cannon">Cannon VL</th>
+        <th class="cannon">💣 Cannon VL</th>
         <th class="cannon">Cannon VLE</th>
         <th class="cannon">Cannon NVL</th>
       </tr>
     </thead>
-    <tbody>
-      <!-- Records loaded below -->
-    </tbody>
+    <tbody></tbody>
   </table>
 
   <footer>
