@@ -77,7 +77,8 @@ header p { color: var(--text-secondary); font-size:1.2rem; margin:0.2rem 0; }
 table { border-collapse:collapse; width:100%; table-layout: fixed; }
 thead th { border-right:1px solid var(--border-color); border-bottom:1px solid var(--border-color);
   padding:1rem 0.5rem; text-align:center; font-size:2.3rem; }
-th:first-child, td:first-child { width:50px; min-width:50px; text-align:center; } /* row number */
+
+th:first-child, td:first-child { width:40px; min-width:40px; text-align:center; }
 th:nth-child(2), td.player:nth-of-type(1) { width:220px; min-width:220px; text-align:left; padding-left:1rem; }
 th:nth-child(3), td.player:nth-of-type(2) { width:220px; min-width:220px; text-align:left; padding-left:1rem; }
 th:nth-child(n+4), td.rocket, td.cannon { width:140px; min-width:140px; }
@@ -117,7 +118,6 @@ footer a:hover { text-decoration:underline; }
 <table id="recordsTable">
 <thead>
 <tr>
-  <th>#</th>
   <th colspan="2" style="background: rgba(200,200,200,0.15);">Player info</th>
   <th colspan="4" style="background: rgba(255,165,0,0.15);">Rockets only</th>
   <th colspan="3" style="background: rgba(100,200,255,0.15);">Cannon</th>
@@ -160,21 +160,25 @@ function getRocketColor(value,type){
   return `rgb(${r},${g},${b})`;
 }
 
+// Cannon color with two ranges
 function getCannonColor(value,type){
   if(value==="—" || value==="-" ) return "#aaa";
   const val=parseInt(value);
-  let min,max;
+  let threshold, min1, max1, min2, max2;
   switch(type){
-    case "VL": min = 44; max = 56; break;
-    case "VLE": min = 45; max = 57; break;
-    case "NVL": min = 46; max = 58; break;
-    default: min = 44; max = 58;
+    case "VL": threshold=52; min1=46; max1=threshold; min2=threshold+1; max2=56; break;
+    case "VLE": threshold=53; min1=50; max1=threshold; min2=threshold+1; max2=57; break;
+    case "NVL": threshold=54; min1=52; max1=threshold; min2=threshold+1; max2=58; break;
+    default: min1=44; max1=54; min2=55; max2=58;
   }
-  const ratio=Math.min(1,Math.max(0,(val-min)/(max-min)));
-  const r = Math.floor(120*ratio+50);
-  const g = Math.floor(200*(1-ratio));
-  const b = 255;
-  return `rgb(${r},${g},${b})`;
+  let ratio;
+  if(val<=threshold){
+    ratio = (val-min1)/(max1-min1);
+    return `rgb(${Math.floor(120*ratio+50)},${Math.floor(200*(1-ratio))},255)`;
+  } else {
+    ratio = (val-min2)/(max2-min2);
+    return `rgb(${Math.min(255, 180+75*ratio)},${Math.floor(255*(1-ratio))},255)`;
+  }
 }
 
 function getRowSum(r){
