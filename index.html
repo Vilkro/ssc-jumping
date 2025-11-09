@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -95,8 +95,26 @@ table {
 thead {
   position: sticky;
   top: 0;
-  background: rgba(45,45,45,0.95);
   z-index: 2;
+}
+
+/* Group header row */
+thead tr.group th {
+  font-size: 1.4rem;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+}
+
+thead tr.group th:nth-child(1),
+thead tr.group th:nth-child(2) {
+  background: rgba(200,200,200,0.15); /* gray for Player Info */
+}
+
+thead tr.group th:nth-child(n+3):nth-child(-n+6) {
+  background: rgba(255,165,0,0.15); /* orange for Rocket */
+}
+
+thead tr.group th:nth-child(n+7):nth-child(-n+9) {
+  background: rgba(100,200,255,0.15); /* blue for Cannon */
 }
 
 th, td {
@@ -111,16 +129,14 @@ th, td {
 
 table th:first-child,
 table td:first-child {
-  width: 220px;  /* adjust as needed */
-  text-align: left; /* optional, looks nicer for names */
+  width: 220px;
+  text-align: left;
   padding-left: 1rem;
 }
 
-/* Second column (Country) wider */
 table th:nth-child(2),
 table td:nth-child(2) {
-  width: 120px;  /* adjust as needed */
-  width: 220px;  /* adjust as needed */
+  width: 120px;
 }
 
 th:last-child, td:last-child { border-right: none; }
@@ -161,16 +177,23 @@ footer a:hover { text-decoration: underline; }
 <div class="table-container">
   <table id="recordsTable">
     <thead>
+      <!-- Group header row -->
+      <tr class="group">
+        <th colspan="2">Player Info</th>
+        <th colspan="4">Rocket</th>
+        <th colspan="3">Cannon</th>
+      </tr>
+      <!-- Detailed headers row -->
       <tr>
         <th>Player</th>
         <th>Country</th>
-        <th class="rocket">VL</th>
-        <th class="rocket">VLE</th>
-        <th class="rocket">VIE</th>
-        <th class="rocket">NVL</th>
-        <th class="cannon">VL</th>
-        <th class="cannon">VLE</th>
-        <th class="cannon">NVL</th>
+        <th>VL</th>
+        <th>VLE</th>
+        <th>VIE</th>
+        <th>NVL</th>
+        <th>VL</th>
+        <th>VLE</th>
+        <th>NVL</th>
       </tr>
     </thead>
     <tbody></tbody>
@@ -187,7 +210,6 @@ const records = [
   { player: "Sasha", country: "RU", rocketVL: "37", rocketVLE: "38", rocketVIE: "—", rocketNVL: "42", cannonVL: "56", cannonVLE: "54", cannonNVL: "58" }
 ];
 
-// Apply color to text itself based on performance
 function getRocketColor(value,type){
   if(value==="—") return "#aaa";
   const val=parseInt(value);
@@ -195,21 +217,19 @@ function getRocketColor(value,type){
   if(type==="NVL"){ min=32; max=42; } 
   else { min=28; max=40; }
   const ratio=Math.min(1,Math.max(0,(val-min)/(max-min)));
-  const r=255, g=Math.floor(165*(1-ratio)), b=92; // vivid orange gradient
+  const r=255, g=Math.floor(165*(1-ratio)), b=92;
   return `rgb(${r},${g},${b})`;
 }
 
 function getCannonColor(value){
   if(value==="—") return "#aaa";
   const val=parseInt(value);
-  const min=38,max=58;
   const min=32,max=58;
   const ratio=Math.min(1,Math.max(0,(val-min)/(max-min)));
-  const r=Math.floor(170*(1-ratio)), g=Math.floor(235*(1-ratio)), b=255; // vivid blue gradient
+  const r=Math.floor(170*(1-ratio)), g=Math.floor(235*(1-ratio)), b=255;
   return `rgb(${r},${g},${b})`;
 }
 
-// Populate table
 const tbody=document.querySelector("#recordsTable tbody");
 records.forEach(r=>{
   const row=document.createElement("tr");
@@ -234,7 +254,6 @@ records.forEach(r=>{
   tbody.appendChild(row);
 });
 
-// Row + column glow on cell hover
 const table = document.getElementById('recordsTable');
 const cells = table.querySelectorAll('td');
 cells.forEach(cell => {
