@@ -134,7 +134,7 @@ footer a:hover { text-decoration: underline; }
 <body>
 <header>
   <h1>Serious Sam Classic Rocket Jump Records</h1>
-  <p>Detailed jumping records table for jumpers. To apply, join the <a href="https://t.me/Serious_Sam_Hyper_Server" target="_blank">Telegram Channel</a></p>
+  <p>Detailed jumping records table for jumpers. To apply, join the <a href="https://t.me/Serious_Sam_Hyper_Server" target="_blank" style="color:#ff5080;">Telegram Channel</a></p>
 </header>
 
 <div class="definitions">
@@ -163,7 +163,7 @@ footer a:hover { text-decoration: underline; }
 
 <footer>
   Made with ChatGPT • 
-  <a href="https://github.com/Vilkro/ssc-rocketjumping" target="_blank">GitHub</a>
+  <a href="https://github.com/Vilkro/ssc-rocketjumping" style="color:#ff8c00;">GitHub</a>
 </footer>
 
 <script>
@@ -187,9 +187,9 @@ function getRocketColor(value,type){
 function getCannonColor(value){
   if(value==="—") return "#aaa";
   const val=parseInt(value);
-  const min=48,max=58;
+  const min=40,max=58;
   const ratio=Math.min(1,Math.max(0,(val-min)/(max-min)));
-  const r=Math.floor(100*(1-ratio)), g=200, b=Math.floor(255*(1-ratio)); // vivid blue gradient
+  const r=Math.floor(100*(1-ratio)), g=Math.floor(200*(1-ratio)), b=255; // vivid blue gradient
   return `rgb(${r},${g},${b})`;
 }
 
