@@ -306,7 +306,7 @@ records.sort((a,b)=>getRowSum(b)-getRowSum(a));
 
 const tbody=document.querySelector("#recordsTable tbody");
   
-function getFontWeight(value, min, max, thresholdRatio = 0.75) {
+function getFontWeight(value, min, max, thresholdRatio = 0.9) {
   if (value === "—" || value === "-") return 250;
   const v = parseFloat(value);
   if (isNaN(v)) return 250;
