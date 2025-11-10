@@ -36,18 +36,22 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background-image:
-    linear-gradient(rgba(0,0,0,0.15) 2px, transparent 2px),
-    linear-gradient(90deg, rgba(0,0,0,0.15) 2px, transparent 2px);
-  background-size: 80px 80px;
-  animation: moveGrid 12s linear infinite alternate;
+  background-color: rgba(30,30,30,0.9);
+  background-image: 
+    repeating-conic-gradient(
+      from 30deg,
+      rgba(255,255,255,0.05) 0deg 60deg,
+      transparent 60deg 120deg
+    );
+  background-size: 60px 60px;
   z-index: 0;
   pointer-events: none;
+  animation: rotateHex 30s linear infinite;
 }
 
-@keyframes moveGrid {
-  from { background-position: 0 0; }
-  to { background-position: 80px 80px; }
+@keyframes rotateHex {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 header {
@@ -307,7 +311,7 @@ records.sort((a,b)=>getRowSum(b)-getRowSum(a));
 
 const tbody=document.querySelector("#recordsTable tbody");
 
-function getFontWeightAligned(value, type, isRocket = true, thresholdRatio = 0.7) {
+function getFontWeightAligned(value, type, isRocket = true, thresholdRatio = 0.8) {
   if (value === "—" || value === "-") return 250;
   const v = parseFloat(value);
   if (isNaN(v)) return 250;
