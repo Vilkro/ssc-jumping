@@ -30,12 +30,11 @@ body {
   align-items: center;
   min-height: 100vh;
   background:
-    linear-gradient(0deg, rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
-    radial-gradient(80% 70% at 50% 50%, #b9a857 0%, #847c4a 25%, #4e4a3a 50%, #2d2c29 70%, #171717 85%, #0a0a0a 100%),
-    radial-gradient(100% 90% at 8% 8%, rgba(0,0,0,0) 40%, #080808 80%, #000000 100%),
-    radial-gradient(100% 90% at 92% 92%, rgba(0,0,0,0) 40%, #080808 80%, #000000 100%),
-    radial-gradient(70% 60% at 50% 60%, rgba(240,220,150,0.06), rgba(0,0,0,0) 60%),
-    #050505
+    linear-gradient(0deg, rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    radial-gradient(85% 75% at 50% 50%, #f1b43c 0%, #e0862f 25%, #b25b23 45%, #6b3d1c 65%, #2e1d11 80%, #0e0b08 100%),
+    radial-gradient(120% 100% at 10% 10%, rgba(0,0,0,0) 40%, #0b0a09 85%, #000000 100%),
+    radial-gradient(120% 100% at 90% 90%, rgba(0,0,0,0) 40%, #0b0a09 85%, #000000 100%),
+    #050505;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -47,7 +46,8 @@ body::after {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.5) 100%);
+  backgroundImage:
+    radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%);
   opacity: 0.95;
   z-index: 0;
 }
@@ -309,7 +309,7 @@ records.sort((a,b)=>getRowSum(b)-getRowSum(a));
 
 const tbody=document.querySelector("#recordsTable tbody");
 
-function getFontWeightAligned(value, type, isRocket = true, thresholdRatio = 0.9) {
+function getFontWeightAligned(value, type, isRocket = true, thresholdRatio = 0.86) {
   if (value === "—" || value === "-") return 250;
   const v = parseFloat(value);
   if (isNaN(v)) return 250;
