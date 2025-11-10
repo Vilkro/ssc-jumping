@@ -36,22 +36,20 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background-color: rgba(30,30,30,0.9);
-  background-image: 
-    repeating-conic-gradient(
-      from 30deg,
-      rgba(255,255,255,0.05) 0deg 60deg,
-      transparent 60deg 120deg
-    );
-  background-size: 60px 60px;
-  z-index: 0;
   pointer-events: none;
-  animation: rotateHex 30s linear infinite;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(0,0,0,0.15) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(0,0,0,0.15) 2px, transparent 2px),
+    radial-gradient(circle at 30px 30px, rgba(255,255,255,0.05) 4px, transparent 5px),
+    radial-gradient(circle at 60px 60px, rgba(255,255,255,0.05) 4px, transparent 5px);
+  background-size: 80px 80px, 80px 80px, 60px 52px, 60px 52px;
+  animation: moveGrid 12s linear infinite alternate;
 }
 
 @keyframes rotateHex {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from { background-position: 0 0, 0 0, 0 0, 0 0; }
+  to   { background-position: 80px 80px, 80px 80px, 0 0, 0 0; }
 }
 
 header {
@@ -318,9 +316,7 @@ function getFontWeightAligned(value, type, isRocket = true, thresholdRatio = 0.8
   const ranges = isRocket ? rocketRanges : cannonRanges;
   const [min, max] = ranges[type] || [0, 100];
   const ratio = Math.max(0, Math.min(1, (v - min) / (max - min)));
-  if (ratio < thresholdRatio) return 250;
-  const boosted = (ratio - thresholdRatio) / (1 - thresholdRatio);
-  return Math.round(250 + boosted * 450);
+  return Math.round(250 + ratio * (900 - 250));
 }
 
 function applyCellStyles() {
