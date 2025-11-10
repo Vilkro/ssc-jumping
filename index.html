@@ -266,12 +266,13 @@ const records = [
   { player: "Mandy", country: "Russia", rocketVL: "-", rocketVLE: "30", rocketVIE: "-", rocketNVL: "32", cannonVL: "-", cannonVLE: "-", cannonNVL: "-" },
   { player: "Sandy", country: "India", rocketVL: "37", rocketVLE: "36", rocketVIE: "-", rocketNVL: "-", cannonVL: "56", cannonVLE: "56", cannonNVL: "56" },
   { player: "Gohan", country: "India", rocketVL: "37", rocketVLE: "36", rocketVIE: "-", rocketNVL: "-", cannonVL: "-", cannonVLE: "56", cannonNVL: "56" },
+  { player: "Test", country: "ew", rocketVL: "32", rocketVLE: "31", rocketVIE: "33", rocketNVL: "28", cannonVL: "40", cannonVLE: "36", cannonNVL: "50" },
   { player: "Supersniper", country: "Greece", rocketVL: "34", rocketVLE: "-", rocketVIE: "-", rocketNVL: "36", cannonVL: "48", cannonVLE: "-", cannonNVL: "-" },
   { player: "Sony", country: "Argentina", rocketVL: "36", rocketVLE: "36", rocketVIE: "-", rocketNVL: "-", cannonVL: "-", cannonVLE: "56", cannonNVL: "56" },
   { player: "Meteor", country: "Germany", rocketVL: "34", rocketVLE: "36", rocketVIE: "32", rocketNVL: "-", cannonVL: "42", cannonVLE: "42", cannonNVL: "54" }
 ];
 
-const rocketRanges = { VL:[23,35], VLE:[24,36], VIE:[22,34], NVL:[28,40] };
+const rocketRanges = { VL:[23,35], VLE:[24,36], VIE:[22,34], NVL:[26,39] };
 const cannonRanges = { VL:[32,53], VLE:[32,55], NVL:[32,56] };
 
 function getRocketColor(value, type){
@@ -311,9 +312,9 @@ function getFontWeight(value, min, max, thresholdRatio = 0.7) {
   const v = parseFloat(value);
   if (isNaN(v)) return 250;
   const ratio = Math.max(0, Math.min(1, (v - min) / (max - min)));
-  if (ratio < thresholdRatio) return 400;
+  if (ratio < thresholdRatio) return 250;
   const boosted = (ratio - thresholdRatio) / (1 - thresholdRatio);
-  return Math.round(250 + boosted * 550);
+  return Math.round(250 + boosted * 450);
 }
 
 records.forEach((r, index) => {
