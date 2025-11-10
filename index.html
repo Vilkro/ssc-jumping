@@ -20,29 +20,24 @@
 }
   
 body {
-  margin: 0;
-  font-family: "Fira Sans", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  color: var(--text-main);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   min-height: 100vh;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
+  margin: 0;
+  background: 
+    radial-gradient(circle at 25% 25%, rgba(255,255,255,0.07) 0%, transparent 45%),
+    radial-gradient(circle at 75% 35%, rgba(255,255,255,0.05) 0%, transparent 45%),
+    radial-gradient(circle at 50% 80%, rgba(255,200,100,0.04) 0%, transparent 60%),
+    linear-gradient(120deg, #14141e 0%, #1a1b25 40%, #1e202b 100%);
+  background-blend-mode: overlay;
   position: relative;
+  overflow: hidden;
 }
 
 body::after {
   content: "";
-  position: fixed;
+  position: absolute;
   inset: 0;
   pointer-events: none;
-  backgroundImage:
-    radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%);
-  opacity: 0.95;
+  background: radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.6) 100%);
   z-index: 0;
 }
 
@@ -311,7 +306,7 @@ function getFontWeightAligned(value, type, isRocket = true, thresholdRatio = 0.9
   const [min, max] = ranges[type] || [0, 100];
   const ratio = Math.max(0, Math.min(1, (v - min) / (max - min)));
   if (ratio < thresholdRatio) {
-    return Math.round(250 + ratio * 400;
+    return Math.round(250 + ratio * 400);
     } else {
     const boosted = (ratio - thresholdRatio) / (1 - thresholdRatio);
     return Math.round(250 + boosted * 650);
