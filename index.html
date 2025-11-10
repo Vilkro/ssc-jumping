@@ -6,7 +6,7 @@
 <title>Serious Sam Jump Records</title>
 <link rel="icon" type="image/png" href="icon.png" />
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
   --bg-main: #2e2e2e;
@@ -277,7 +277,7 @@ const cannonRanges = { VL:[32,53], VLE:[32,55], NVL:[32,56] };
 function getRocketColor(value, type){
   if(value==="—" || value==="-" ) return "#aaa";
   const v = parseFloat(value);
-  const [min, max] = rocketRanges[type] || [-12,40];
+  const [min, max] = rocketRanges[type] || [32,40];
   if (isNaN(v)) return "#aaa";
   const ratio = Math.max(0, Math.min(1, (v - min) / (max - min)));
   let r = 255, g = Math.round(200 - 120 * ratio), b = Math.round(80 - 20 * ratio);
@@ -288,7 +288,7 @@ function getRocketColor(value, type){
 function getCannonColor(value, type){
   if(value==="—" || value==="-" ) return "#aaa";
   const v = parseFloat(value);
-  const [min, max] = cannonRanges[type] || [32,56];
+  const [min, max] = cannonRanges[type] || [48,56];
   if (isNaN(v)) return "#aaa";
   const ratio = Math.max(0, Math.min(1, (v - min) / (max - min)));
   let r = Math.round(0 + 120 * ratio),
