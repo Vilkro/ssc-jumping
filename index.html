@@ -108,7 +108,7 @@ header p {
   background: var(--bg-accent);
   border-radius:10px;
   border:1px solid var(--border-color);
-  box-shadow:0 4px 15px rgba(0,0,0,0.25);
+  box-shadow:0 7px 26px rgba(0,0,0,0.25);
 }
 
 table {
@@ -302,7 +302,7 @@ records.sort((a,b)=>getRowSum(b)-getRowSum(a));
 
 const tbody=document.querySelector("#recordsTable tbody");
 
-function getFontWeightAligned(value, type, isRocket = true, thresholdRatio = 0.9) {
+function getFontWeightAligned(value, type, isRocket = true, thresholdRatio = 0.95) {
   if (value === "—" || value === "-") return 250;
   const v = parseFloat(value);
   if (isNaN(v)) return 250;
@@ -310,7 +310,7 @@ function getFontWeightAligned(value, type, isRocket = true, thresholdRatio = 0.9
   const [min, max] = ranges[type] || [0, 100];
   const ratio = Math.max(0, Math.min(1, (v - min) / (max - min)));
   if (ratio < thresholdRatio) {
-    return Math.round(ratio * 900);
+    return Math.round(250 + ratio * 450);
     } else {
     const boosted = (ratio - thresholdRatio) / (1 - thresholdRatio);
     return Math.round(boosted * 900);
