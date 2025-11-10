@@ -30,13 +30,12 @@ body {
   align-items: center;
   min-height: 100vh;
   background:
-     linear-gradient(0deg, rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-     radial-gradient(90% 80% at 50% 50%, #c81e3a 0%, #a51d35 20%, #7d1a2f 40%, #591828 60%, #3c1722 75%, #1f1317 90%, #0a0a0a 100%)
-     radial-gradient(90% 75% at 50% 50%, rgba(66,42,228,0.06) 0%, rgba(66,42,228,0) 55%),
-     radial-gradient(150% 120% at 8% 8%, rgba(0,0,0,0) 42%, #0b0a0a 82%, #070707 100%),
-     radial-gradient(150% 120% at 92% 92%, rgba(0,0,0,0) 42%, #0b0a0a 82%, #070707 100%),
-     radial-gradient(70% 60% at 50% 60%, rgba(80,60,240,0.06), rgba(0,0,0,0) 60%),
-     #050505;
+    linear-gradient(0deg, rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+    radial-gradient(80% 70% at 50% 50%, #b9a857 0%, #847c4a 25%, #4e4a3a 50%, #2d2c29 70%, #171717 85%, #0a0a0a 100%),
+    radial-gradient(100% 90% at 8% 8%, rgba(0,0,0,0) 40%, #080808 80%, #000000 100%),
+    radial-gradient(100% 90% at 92% 92%, rgba(0,0,0,0) 40%, #080808 80%, #000000 100%),
+    radial-gradient(70% 60% at 50% 60%, rgba(240,220,150,0.06), rgba(0,0,0,0) 60%),
+    #050505
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -310,7 +309,7 @@ records.sort((a,b)=>getRowSum(b)-getRowSum(a));
 
 const tbody=document.querySelector("#recordsTable tbody");
 
-function getFontWeightAligned(value, type, isRocket = true, thresholdRatio = 0.75) {
+function getFontWeightAligned(value, type, isRocket = true, thresholdRatio = 0.9) {
   if (value === "—" || value === "-") return 250;
   const v = parseFloat(value);
   if (isNaN(v)) return 250;
