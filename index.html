@@ -272,7 +272,7 @@ const records = [
   { player: "Meteor", country: "Germany", rocketVL: "34", rocketVLE: "36", rocketVIE: "32", rocketNVL: "-", cannonVL: "42", cannonVLE: "42", cannonNVL: "54" }
 ];
 
-const rocketRanges = { VL:[23,35], VLE:[24,36], VIE:[22,34], NVL:[26,39] };
+const rocketRanges = { VL:[22,34], VLE:[23,35], VIE:[22,31], NVL:[26,39] };
 const cannonRanges = { VL:[32,53], VLE:[32,55], NVL:[32,56] };
 
 function getRocketColor(value, type){
@@ -320,6 +320,17 @@ function getFontWeight(value, min, max, thresholdRatio = 0.7) {
   const weight = 400 + Math.pow(boosted, 1.2) * 450;
   return Math.round(weight);
 }
+function getFontWeightAligned(value, type, isRocket = true, thresholdRatio = 0.7) {
+  if (value === "—" || value === "-") return 250;
+  const v = parseFloat(value);
+  if (isNaN(v)) return 250;
+  const ranges = isRocket ? rocketRanges : cannonRanges;
+  const [min, max] = ranges[type] || [0, 100];
+  const ratio = Math.max(0, Math.min(1, (v - min) / (max - min)));
+  if (ratio < thresholdRatio) return 250;
+  const boosted = (ratio - thresholdRatio) / (1 - thresholdRatio);
+  return Math.round(250 + boosted * 450);
+}
 
 function applyCellStyles() {
   const rows = document.querySelectorAll("tbody tr");
@@ -366,19 +377,17 @@ records.forEach((r, index) => {
   `;
 
   row.querySelectorAll("td.rocket").forEach((td, i) => {
-    const type = ["VL", "VLE", "VIE", "NVL"][i];
-    const val = parseFloat(td.textContent);
-    td.style.color = getRocketColor(td.textContent, type);
-    const [min, max] = rocketRanges[type];
-    td.style.fontWeight = getFontWeight(val, min, max);
+  const type = ["VL", "VLE", "VIE", "NVL"][i];
+  const val = parseFloat(td.textContent);
+  td.style.color = getRocketColor(td.textContent, type);
+  td.style.fontWeight = getFontWeightAligned(val, type, true);
   });
 
   row.querySelectorAll("td.cannon").forEach((td, i) => {
-    const type = ["VL", "VLE", "NVL"][i];
-    const val = parseFloat(td.textContent);
-    td.style.color = getCannonColor(td.textContent, type);
-    const [min, max] = cannonRanges[type];
-    td.style.fontWeight = getFontWeight(val, min, max);
+  const type = ["VL", "VLE", "NVL"][i];
+  const val = parseFloat(td.textContent);
+  td.style.color = getCannonColor(td.textContent, type);
+  td.style.fontWeight = getFontWeightAligned(val, type, false);
   });
 
   tbody.appendChild(row);
