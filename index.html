@@ -32,10 +32,10 @@ body {
   background:
      linear-gradient(0deg, rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
      radial-gradient(68% 58% at 50% 50%, #c81e3a 0%, #a51d35 16%, #7d1a2f 32%, #591828 46%, #3c1722 60%, #2a151d 72%, #1f1317 84%, #141013 94%, #0a0a0a 100%),
-     radial-gradient(90% 75% at 50% 50%, rgba(228,42,66,0.06) 0%, rgba(228,42,66,0) 55%),
+     radial-gradient(90% 75% at 50% 50%, rgba(66,42,228,0.06) 0%, rgba(66,42,228,0) 55%),
      radial-gradient(150% 120% at 8% 8%, rgba(0,0,0,0) 42%, #0b0a0a 82%, #070707 100%),
      radial-gradient(150% 120% at 92% 92%, rgba(0,0,0,0) 42%, #0b0a0a 82%, #070707 100%),
-     radial-gradient(60% 50% at 50% 60%, rgba(240,60,80,0.06), rgba(0,0,0,0) 60%),
+     radial-gradient(70% 60% at 50% 60%, rgba(80,60,240,0.06), rgba(0,0,0,0) 60%),
      #050505;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -51,11 +51,6 @@ body::after {
   background: radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.5) 100%);
   opacity: 0.95;
   z-index: 0;
-}
-
-@keyframes rotateHex {
-  from { background-position: 0 0, 0 0, 0 0, 0 0; }
-  to   { background-position: 80px 80px, 80px 80px, 0 0, 0 0; }
 }
 
 header {
@@ -315,7 +310,7 @@ records.sort((a,b)=>getRowSum(b)-getRowSum(a));
 
 const tbody=document.querySelector("#recordsTable tbody");
 
-function getFontWeightAligned(value, type, isRocket = true, thresholdRatio = 0.65) {
+function getFontWeightAligned(value, type, isRocket = true, thresholdRatio = 0.75) {
   if (value === "—" || value === "-") return 250;
   const v = parseFloat(value);
   if (isNaN(v)) return 250;
@@ -343,11 +338,11 @@ function applyCellStyles() {
 
       let color, weight;
 
-      if (index >= 3 && index <= 6) { // rocket columns
+      if (index >= 3 && index <= 6) {
         const min = 30, max = 42;
         color = getRocketColor(value, "VL");
         weight = getFontWeight(value, min, max);
-      } else if (index >= 7 && index <= 9) { // cannon columns
+      } else if (index >= 7 && index <= 9) {
         const min = 40, max = 58;
         color = getCannonColor(value, "VL");
         weight = getFontWeight(value, min, max);
