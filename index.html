@@ -288,7 +288,7 @@ function getRocketColor(value, type){
 function getCannonColor(value, type){
   if(value==="—" || value==="-" ) return "#aaa";
   const v = parseFloat(value);
-  const [min, max] = cannonRanges[type] || [40,56];
+  const [min, max] = cannonRanges[type] || [32,56];
   if (isNaN(v)) return "#aaa";
   const ratio = Math.max(0, Math.min(1, (v - min) / (max - min)));
   let r = Math.round(0 + 120 * ratio),
@@ -305,12 +305,19 @@ function getRowSum(r){
 records.sort((a,b)=>getRowSum(b)-getRowSum(a));
 
 const tbody=document.querySelector("#recordsTable tbody");
-function getFontWeight(value, min, max) {
+function getFontWeight(value, min, max, thresholdRatio = 0.6) {
   if (value === "—" || value === "-") return 400;
   const v = parseFloat(value);
   if (isNaN(v)) return 400;
+
+  // Normalize 0–1 based on min/max
   const ratio = Math.max(0, Math.min(1, (v - min) / (max - min)));
-  return Math.round(400 + ratio * 500);
+
+  // Font weight only increases when value exceeds thresholdRatio (e.g. 60% of range)
+  if (ratio < thresholdRatio) return 400;
+
+  const boosted = (ratio - thresholdRatio) / (1 - thresholdRatio); // 0–1 after threshold
+  return Math.round(400 + boosted * 500); // scales up to 900
 }
 
 records.forEach((r, index) => {
