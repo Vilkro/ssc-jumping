@@ -312,9 +312,13 @@ function getFontWeight(value, min, max, thresholdRatio = 0.7) {
   const v = parseFloat(value);
   if (isNaN(v)) return 250;
   const ratio = Math.max(0, Math.min(1, (v - min) / (max - min)));
-  if (ratio < thresholdRatio) return 250;
+  if (ratio < thresholdRatio) {
+    const lowWeight = 250 + (ratio / thresholdRatio) * 150;
+    return Math.round(lowWeight);
+  }
   const boosted = (ratio - thresholdRatio) / (1 - thresholdRatio);
-  return Math.round(250 + boosted * 450);
+  const weight = 400 + boosted * 400;
+  return Math.round(weight);
 }
 
 function applyCellStyles() {
