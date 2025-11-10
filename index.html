@@ -277,7 +277,7 @@ const cannonRanges = { VL:[32,53], VLE:[32,55], NVL:[32,56] };
 function getRocketColor(value, type){
   if(value==="—" || value==="-" ) return "#aaa";
   const v = parseFloat(value);
-  const [min, max] = rocketRanges[type] || [32,40];
+  const [min, max] = rocketRanges[type] || [28,40];
   if (isNaN(v)) return "#aaa";
   const ratio = Math.max(0, Math.min(1, (v - min) / (max - min)));
   let r = 255, g = Math.round(200 - 120 * ratio), b = Math.round(80 - 20 * ratio);
@@ -288,7 +288,7 @@ function getRocketColor(value, type){
 function getCannonColor(value, type){
   if(value==="—" || value==="-" ) return "#aaa";
   const v = parseFloat(value);
-  const [min, max] = cannonRanges[type] || [48,56];
+  const [min, max] = cannonRanges[type] || [40,56];
   if (isNaN(v)) return "#aaa";
   const ratio = Math.max(0, Math.min(1, (v - min) / (max - min)));
   let r = Math.round(0 + 120 * ratio),
