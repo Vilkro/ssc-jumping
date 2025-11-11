@@ -18,14 +18,14 @@
   --highlight-rocket: rgba(255,184,77,0.065);
   --highlight-cannon: rgba(150,100,255,0.065);
 }
-  
+
 body {
   margin: 0;
   font-family: "Fira Sans", sans-serif;
   background:
     radial-gradient(circle at 30% 20%, rgba(255,140,60,0.05) 0%, transparent 30%),
     radial-gradient(circle at 70% 80%, rgba(255,255,255,0.05) 0%, transparent 40%),
-    linear-gradient(145deg, #101010 0%, #1a1a1a 50%, #222 100%);
+    linear-gradient(145deg, #121212 0%, #1b1b1b 50%, #252525 100%);
   color: var(--text-main);
   display: flex;
   flex-direction: column;
@@ -96,6 +96,28 @@ header p {
   border:3.5px solid var(--border-color);
   box-shadow:0 8px 30px rgba(0,0,0,0.25);
   opacity:0.9;
+  transform-origin: center center;
+  transition: transform 0.3s ease;
+}
+
+.zoom-controls {
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-top:10px;
+}
+.zoom-controls button {
+  background:rgba(255,180,70,0.1);
+  border:1px solid var(--border-color);
+  border-radius:6px;
+  color:var(--text-main);
+  font-size:1.2rem;
+  padding:0.3rem 0.7rem;
+  cursor:pointer;
+  transition:background 0.3s;
+}
+.zoom-controls button:hover {
+  background:rgba(255,180,70,0.3);
 }
 
 table {
@@ -164,9 +186,9 @@ footer a:hover { text-decoration:underline; }
 </style>
 </head>
 <body>
+
 <header>
 <h1>Rocket Jump Records in Serious Sam Classic</h1>
-<br>
 <p>Detailed jumping records table for jumpers. To apply, join the
 <a href="https://t.me/Serious_Sam_Hyper_Server" target="_blank" style="color:#ffa65c; text-decoration:none">Telegram Channel</a>.</p>
 <p>Players are sorted by the sum of their values. Bigger jumps have lower probability of success.</p>
@@ -175,15 +197,14 @@ footer a:hover { text-decoration:underline; }
 <div class="definitions">
 <strong>Definitions:</strong><br>
 <b>VL</b> = Vertical &nbsp•&nbsp <b>VLE</b> = Vertical Express &nbsp•&nbsp <b>VIE</b> = Very Important Edge &nbsp•&nbsp <b>NVL</b> = Not Vertical<br>
-<strong>Difficulty:</strong>
+<strong>Difficulty:</strong><br>
 <span class="legend-inline">
 Rocket: <span class="legend-color rocket-easy"></span> Easy <span class="legend-color rocket-hard"></span> Hard &nbsp•&nbsp
 Cannon: <span class="legend-color cannon-easy"></span> Easy <span class="legend-color cannon-hard"></span> Hard
 </span>
 </div>
-<br>
 
-<div class="table-container">
+<div class="table-container" id="zoomableTable">
 <table id="recordsTable">
 <thead>
 <tr>
@@ -209,8 +230,12 @@ Cannon: <span class="legend-color cannon-easy"></span> Easy <span class="legend-
 </table>
 </div>
 
+<div class="zoom-controls">
+  <button id="zoomOut">−</button>
+  <button id="zoomIn">+</button>
+</div>
+
 <footer>Table of verified jumps</footer>
-<br>
 
 <script>
 const records = [
@@ -255,9 +280,9 @@ function getFontWeightAligned(value,type,isRocket=true){
   const ranges=isRocket?rocketRanges:cannonRanges;
   const[min,max]=ranges[type]||[0,100];
   const ratio=Math.max(0,Math.min(1,(v-min)/(max-min)));
-  if(v<=max)return Math.round(250+ratio*150);
+  if(v<=max)return Math.round(250+ratio*140);
   const extra=Math.min(4,v-max);
-  return Math.round(400+extra*125);
+  return Math.round(390+extra*110); // slightly stricter threshold
 }
 
 function getRowSum(r){
@@ -309,6 +334,18 @@ table.querySelectorAll('tbody td').forEach(cell=>{
     table.querySelectorAll('tbody tr').forEach(tr=>{if(tr.children[col])tr.children[col].style.backgroundColor='';});
     cell.parentElement.querySelectorAll('td').forEach(td=>td.style.backgroundColor='');
   });
+});
+
+// Zoom buttons
+let zoomLevel = 1;
+const zoomable = document.getElementById("zoomableTable");
+document.getElementById("zoomIn").addEventListener("click",()=>{
+  zoomLevel = Math.min(1.6, zoomLevel + 0.1);
+  zoomable.style.transform = `scale(${zoomLevel})`;
+});
+document.getElementById("zoomOut").addEventListener("click",()=>{
+  zoomLevel = Math.max(0.7, zoomLevel - 0.1);
+  zoomable.style.transform = `scale(${zoomLevel})`;
 });
 </script>
 </body>
