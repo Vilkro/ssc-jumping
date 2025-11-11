@@ -322,7 +322,7 @@ function getFontWeightAligned(value, type, isRocket = true, thresholdRatio = 0.9
   } else if (ratio < 0.99) {
     return 400 + (ratio - 0.65) * (500 - 400) / (0.99 - 0.65);
   } else {
-    const boosted = Math.pow((ratio - 0.99) / 0.05, 0.65);
+    const boosted = Math.pow((ratio - 0.99) / 0.01, 0.65);
     return Math.round(500 + boosted * (900 - 500));
   }
 }
