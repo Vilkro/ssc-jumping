@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Serious Sam Jump Records</title>
 <link rel="icon" type="image/png" href="icon.png" />
 <style>
@@ -10,35 +10,33 @@
 
 :root {
   --bg-main: #2e2e2e;
-  --bg-accent: rgba(40,40,40,0.9);
+  --bg-accent: rgba(40,40,40,0.95);
   --text-main: #e0e0e0;
   --text-secondary: #aaa;
   --border-color: #555;
-  --highlight-player: rgba(200,200,200,0.08);
-  --highlight-rocket: rgba(255,184,77,0.08);
-  --highlight-cannon: rgba(150,100,255,0.08);
+  --highlight-player: rgba(200,200,200,0.065);
+  --highlight-rocket: rgba(255,184,77,0.065);
+  --highlight-cannon: rgba(150,100,255,0.065);
 }
-
-html, body {
+  
+body {
   margin: 0;
-  padding: 0;
   font-family: "Fira Sans", sans-serif;
-  color: var(--text-main);
   background:
-    radial-gradient(circle at 30% 20%, rgba(255,140,60,0.09) 0%, transparent 30%),
-    radial-gradient(circle at 70% 80%, rgba(255,255,255,0.13) 0%, transparent 40%),
-    linear-gradient(145deg, #0f0f0f 0%, #191919 25%, #1f1f1f 50%, #1a1a1a 75%, #0e0e0e 100%);
-  background-attachment: fixed;
+    radial-gradient(circle at 30% 20%, rgba(255,140,60,0.05) 0%, transparent 30%),
+    radial-gradient(circle at 70% 80%, rgba(255,255,255,0.05) 0%, transparent 40%),
+    linear-gradient(145deg, #101010 0%, #1a1a1a 50%, #222 100%);
+  color: var(--text-main);
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  overflow-x: hidden;
 }
 
 header {
   text-align:center;
   padding:1.2rem 0;
+  z-index:1;
 }
 header h1 {
   font-size:3.2rem;
@@ -50,7 +48,7 @@ header p {
   color: var(--text-secondary);
   font-size:1.2rem;
   margin:0.2rem 0;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  text-shadow:1px 1px 2px rgba(0,0,0,0.5);
 }
 
 .definitions {
@@ -64,28 +62,27 @@ header p {
   line-height:1.5;
   text-shadow:1px 1px 1px rgba(0,0,0,0.6);
 }
-.definitions strong { color: #ffa65c; }
+.definitions strong { color:#ffa65c; }
 
 .legend-inline {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  font-size: 1rem;
+  display:inline-flex;
+  align-items:center;
+  gap:0.5rem;
+  flex-wrap:wrap;
+  font-size:1rem;
 }
-
 .legend-color {
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  border-radius: 3px;
-  border: 1px solid var(--border-color);
+  display:inline-block;
+  width:18px;
+  height:18px;
+  border-radius:3px;
+  border:1px solid var(--border-color);
+  vertical-align:middle;
 }
-
-.rocket-easy { background: #ffc966; }
-.rocket-hard { background: rgb(255,120,180); }
-.cannon-easy { background: #80ffff; }
-.cannon-hard { background: rgb(204,102,255); }
+.rocket-easy { background:#ffc966; }
+.rocket-hard { background:rgb(255,120,180); }
+.cannon-easy { background:#80ffff; }
+.cannon-hard { background:rgb(204,102,255); }
 
 .table-container {
   position: relative;
@@ -98,7 +95,7 @@ header p {
   border-radius:10px;
   border:3.5px solid var(--border-color);
   box-shadow:0 8px 30px rgba(0,0,0,0.25);
-  opacity: 0.88;
+  opacity:0.9;
 }
 
 table {
@@ -113,12 +110,11 @@ thead th {
   text-align:center;
   font-size:2.3rem;
 }
-
 th:first-child, td:first-child {
   width:33px;
   min-width:33px;
   text-align:center;
-  background: rgba(200,200,200,0.12);
+  background:rgba(200,200,200,0.12);
 }
 th:nth-child(2), td:nth-child(2),
 th:nth-child(3), td:nth-child(3) {
@@ -130,52 +126,47 @@ th:nth-child(3), td:nth-child(3) {
 th:nth-child(n+4), td:nth-child(n+4) {
   width:161px;
   min-width:161px;
-  text-align:center;
 }
-
 td {
   padding:1rem 0.5rem;
+  text-align:center;
   border-right:1px solid var(--border-color);
   border-bottom:1px solid var(--border-color);
   font-size:2.3rem;
   text-shadow:1px 1px 2px rgba(0,0,0,0.7);
-  transition: background-color 0.25s ease, color 0.2s ease, font-weight 0.2s ease;
+  overflow:hidden;
+  transition:background-color 0.25s ease;
 }
-td:nth-child(3) { text-align:left; }
+td:nth-child(3){ text-align:left; }
 th:last-child, td:last-child { border-right:none; }
-tr:nth-child(even) td { background-color: rgba(255,255,255,0.05); }
+tr:nth-child(even) td { background-color:rgba(255,255,255,0.05); }
 
-#recordsTable thead tr:nth-child(1) th { background: rgba(60,60,60,0.95); }
+#recordsTable thead tr:nth-child(1) th { background:rgba(60,60,60,0.95); }
 #recordsTable thead tr:nth-child(2) th:nth-child(1),
 #recordsTable thead tr:nth-child(2) th:nth-child(2),
-#recordsTable thead tr:nth-child(2) th:nth-child(3) { background: rgba(200,200,200,0.14); }
+#recordsTable thead tr:nth-child(2) th:nth-child(3){ background:rgba(200,200,200,0.14);}
 #recordsTable thead tr:nth-child(2) th:nth-child(4),
 #recordsTable thead tr:nth-child(2) th:nth-child(5),
 #recordsTable thead tr:nth-child(2) th:nth-child(6),
-#recordsTable thead tr:nth-child(2) th:nth-child(7) { background: rgba(255,165,0,0.10); }
+#recordsTable thead tr:nth-child(2) th:nth-child(7){ background:rgba(255,165,0,0.10);}
 #recordsTable thead tr:nth-child(2) th:nth-child(8),
 #recordsTable thead tr:nth-child(2) th:nth-child(9),
-#recordsTable thead tr:nth-child(2) th:nth-child(10) { background: rgba(100,200,255,0.10); }
+#recordsTable thead tr:nth-child(2) th:nth-child(10){ background:rgba(100,200,255,0.10); }
 
 footer {
   text-align:center;
   padding:0.8rem;
-  color: var(--text-secondary);
+  color:var(--text-secondary);
   font-size:1rem;
 }
 footer a { color:#ffa65c; text-decoration:none; }
 footer a:hover { text-decoration:underline; }
-
-@media (max-width: 768px) {
-  table {
-    font-size: clamp(1rem, 2.4vw, 2rem);
-  }
-}
 </style>
 </head>
 <body>
 <header>
 <h1>Rocket Jump Records in Serious Sam Classic</h1>
+<br>
 <p>Detailed jumping records table for jumpers. To apply, join the
 <a href="https://t.me/Serious_Sam_Hyper_Server" target="_blank" style="color:#ffa65c; text-decoration:none">Telegram Channel</a>.</p>
 <p>Players are sorted by the sum of their values. Bigger jumps have lower probability of success.</p>
@@ -183,22 +174,23 @@ footer a:hover { text-decoration:underline; }
 
 <div class="definitions">
 <strong>Definitions:</strong><br>
-<b>VL</b> = Vertical • <b>VLE</b> = Vertical Express • <b>VIE</b> = Very Important Edge • <b>NVL</b> = Not Vertical<br>
-<strong>Difficulty:</strong><br>
+<b>VL</b> = Vertical &nbsp•&nbsp <b>VLE</b> = Vertical Express &nbsp•&nbsp <b>VIE</b> = Very Important Edge &nbsp•&nbsp <b>NVL</b> = Not Vertical<br>
+<strong>Difficulty:</strong>
 <span class="legend-inline">
-  Rocket: <span class="legend-color rocket-easy"></span> Easy <span class="legend-color rocket-hard"></span> Hard •
-  Cannon: <span class="legend-color cannon-easy"></span> Easy <span class="legend-color cannon-hard"></span> Hard
+Rocket: <span class="legend-color rocket-easy"></span> Easy <span class="legend-color rocket-hard"></span> Hard &nbsp•&nbsp
+Cannon: <span class="legend-color cannon-easy"></span> Easy <span class="legend-color cannon-hard"></span> Hard
 </span>
 </div>
+<br>
 
 <div class="table-container">
 <table id="recordsTable">
 <thead>
 <tr>
   <th>Pos</th>
-  <th colspan="2" style="background: rgba(200,200,200,0.155);">Player info</th>
-  <th colspan="4" style="background: rgba(255,165,0,0.115);">Rocket</th>
-  <th colspan="3" style="background: rgba(100,200,255,0.115);">Cannon</th>
+  <th colspan="2" style="background:rgba(200,200,200,0.155);">Player info</th>
+  <th colspan="4" style="background:rgba(255,165,0,0.115);">Rocket</th>
+  <th colspan="3" style="background:rgba(100,200,255,0.115);">Cannon</th>
 </tr>
 <tr>
   <th>#</th>
@@ -218,75 +210,68 @@ footer a:hover { text-decoration:underline; }
 </div>
 
 <footer>Table of verified jumps</footer>
+<br>
 
 <script>
 const records = [
-  { player: "Mask", country: "Russia", rocketVL: "36", rocketVLE: "38", rocketVIE: "35", rocketNVL: "41", cannonVL: "53", cannonVLE: "48", cannonNVL: "52" },
-  { player: "Val", country: "Kazakhstan", rocketVL: "89", rocketVLE: "36", rocketVIE: "32", rocketNVL: "40", cannonVL: "29", cannonVLE: "24", cannonNVL: "58" },
-  { player: "Dark", country: "Russia", rocketVL: "37", rocketVLE: "36", rocketVIE: "32", rocketNVL: "40", cannonVL: "56", cannonVLE: "56", cannonNVL: "57" },
-  { player: "Mandy", country: "Russia", rocketVL: "-", rocketVLE: "30", rocketVIE: "-", rocketNVL: "32", cannonVL: "-", cannonVLE: "-", cannonNVL: "-" },
-  { player: "Sandy", country: "India", rocketVL: "37", rocketVLE: "36", rocketVIE: "-", rocketNVL: "-", cannonVL: "56", cannonVLE: "56", cannonNVL: "56" },
-  { player: "Gohan", country: "India", rocketVL: "37", rocketVLE: "36", rocketVIE: "-", rocketNVL: "-", cannonVL: "-", cannonVLE: "56", cannonNVL: "56" },
-  { player: "Test", country: "ew", rocketVL: "32", rocketVLE: "31", rocketVIE: "33", rocketNVL: "28", cannonVL: "40", cannonVLE: "36", cannonNVL: "50" },
-  { player: "Supersniper", country: "Greece", rocketVL: "34", rocketVLE: "-", rocketVIE: "-", rocketNVL: "36", cannonVL: "48", cannonVLE: "-", cannonNVL: "-" },
-  { player: "Sony", country: "Argentina", rocketVL: "36", rocketVLE: "36", rocketVIE: "-", rocketNVL: "-", cannonVL: "-", cannonVLE: "56", cannonNVL: "56" },
-  { player: "Meteor", country: "Germany", rocketVL: "34", rocketVLE: "36", rocketVIE: "32", rocketNVL: "-", cannonVL: "42", cannonVLE: "42", cannonNVL: "54" }
+  { player:"Mask",country:"Russia",rocketVL:"36",rocketVLE:"38",rocketVIE:"35",rocketNVL:"41",cannonVL:"53",cannonVLE:"48",cannonNVL:"52" },
+  { player:"Val",country:"Kazakhstan",rocketVL:"89",rocketVLE:"36",rocketVIE:"32",rocketNVL:"40",cannonVL:"29",cannonVLE:"24",cannonNVL:"58" },
+  { player:"Dark",country:"Russia",rocketVL:"37",rocketVLE:"36",rocketVIE:"32",rocketNVL:"40",cannonVL:"56",cannonVLE:"56",cannonNVL:"57" },
+  { player:"Mandy",country:"Russia",rocketVL:"-",rocketVLE:"30",rocketVIE:"-",rocketNVL:"32",cannonVL:"-",cannonVLE:"-",cannonNVL:"-" },
+  { player:"Sandy",country:"India",rocketVL:"37",rocketVLE:"36",rocketVIE:"-",rocketNVL:"-",cannonVL:"56",cannonVLE:"56",cannonNVL:"56" },
+  { player:"Gohan",country:"India",rocketVL:"37",rocketVLE:"36",rocketVIE:"-",rocketNVL:"-",cannonVL:"-",cannonVLE:"56",cannonNVL:"56" },
+  { player:"Test",country:"ew",rocketVL:"32",rocketVLE:"31",rocketVIE:"33",rocketNVL:"28",cannonVL:"40",cannonVLE:"36",cannonNVL:"50" },
+  { player:"Supersniper",country:"Greece",rocketVL:"34",rocketVLE:"-",rocketVIE:"-",rocketNVL:"36",cannonVL:"48",cannonVLE:"-",cannonNVL:"-" },
+  { player:"Sony",country:"Argentina",rocketVL:"36",rocketVLE:"36",rocketVIE:"-",rocketNVL:"-",cannonVL:"-",cannonVLE:"56",cannonNVL:"56" },
+  { player:"Meteor",country:"Germany",rocketVL:"34",rocketVLE:"36",rocketVIE:"32",rocketNVL:"-",cannonVL:"42",cannonVLE:"42",cannonNVL:"54" }
 ];
 
 const rocketRanges = { VL:[22,34], VLE:[23,35], VIE:[22,31], NVL:[26,39] };
 const cannonRanges = { VL:[30,52], VLE:[31,53], NVL:[32,54] };
 
-function getRocketColor(value, type){
-  if(value==="—" || value==="-" ) return "#aaa";
-  const v = parseFloat(value);
-  const [min, max] = rocketRanges[type] || [28,40];
-  if (isNaN(v)) return "#aaa";
-  const ratio = Math.max(0, Math.min(1, (v - min) / (max - min)));
-  let r = 255, g = Math.round(200 - 120 * ratio), b = Math.round(80 - 20 * ratio);
-  if (v > max) { const extra = Math.min(4, v - max); r += 12*extra; g -= 30*extra; b += 45*extra; }
-  return `rgb(${r},${Math.max(0,g)},${Math.min(255,b)})`;
+function getRocketColor(v,t){
+  if(v==="—"||v==="-")return"#aaa";
+  v=parseFloat(v);const[min,max]=rocketRanges[t]||[28,40];
+  if(isNaN(v))return"#aaa";
+  const r=Math.max(0,Math.min(1,(v-min)/(max-min)));
+  let R=255,G=Math.round(200-120*r),B=Math.round(80-20*r);
+  if(v>max){const e=Math.min(4,v-max);R+=12*e;G-=30*e;B+=45*e;}
+  return`rgb(${R},${Math.max(0,G)},${Math.min(255,B)})`;
+}
+function getCannonColor(v,t){
+  if(v==="—"||v==="-")return"#aaa";
+  v=parseFloat(v);const[min,max]=cannonRanges[t]||[32,56];
+  if(isNaN(v))return"#aaa";
+  const r=Math.max(0,Math.min(1,(v-min)/(max-min)));
+  let R=Math.round(0+120*r),G=Math.round(180-60*r),B=Math.round(180+75*r);
+  if(v>max){const e=Math.min(4,v-max);R+=30*e;G-=40*e;B+=12*e;}
+  return`rgb(${Math.min(255,R)},${Math.max(0,G)},${Math.min(255,B)})`;
 }
 
-function getCannonColor(value, type){
-  if(value==="—" || value==="-" ) return "#aaa";
-  const v = parseFloat(value);
-  const [min, max] = cannonRanges[type] || [32,56];
-  if (isNaN(v)) return "#aaa";
-  const ratio = Math.max(0, Math.min(1, (v - min) / (max - min)));
-  let r = Math.round(0 + 120 * ratio),
-      g = Math.round(180 - 60 * ratio),
-      b = Math.round(180 + 75 * ratio);
-  if (v > max) { const extra = Math.min(4, v - max); r += 30*extra; g -= 40*extra; b += 12*extra; }
-  return `rgb(${Math.min(255,r)},${Math.max(0,g)},${Math.min(255,b)})`;
+function getFontWeightAligned(value,type,isRocket=true){
+  if(value==="—"||value==="-")return 250;
+  const v=parseFloat(value);
+  if(isNaN(v))return 250;
+  const ranges=isRocket?rocketRanges:cannonRanges;
+  const[min,max]=ranges[type]||[0,100];
+  const ratio=Math.max(0,Math.min(1,(v-min)/(max-min)));
+  if(v<=max)return Math.round(250+ratio*150);
+  const extra=Math.min(4,v-max);
+  return Math.round(400+extra*125);
 }
 
 function getRowSum(r){
-  const vals = [r.rocketVL,r.rocketVLE,r.rocketVIE,r.rocketNVL,r.cannonVL,r.cannonVLE,r.cannonNVL];
-  return vals.reduce((acc,v)=>{ const n=parseFloat(v); return acc + (isNaN(n)?0:n); },0);
+  const vals=[r.rocketVL,r.rocketVLE,r.rocketVIE,r.rocketNVL,r.cannonVL,r.cannonVLE,r.cannonNVL];
+  return vals.reduce((a,v)=>{const n=parseFloat(v);return a+(isNaN(n)?0:n);},0);
 }
 records.sort((a,b)=>getRowSum(b)-getRowSum(a));
 
-function getFontWeightAligned(value, type, isRocket = true, thresholdRatio = 0.95) {
-  if (value === "—" || value === "-") return 250;
-  const v = parseFloat(value);
-  if (isNaN(v)) return 250;
-  const ranges = isRocket ? rocketRanges : cannonRanges;
-  const [min, max] = ranges[type] || [0, 100];
-  const ratio = Math.max(0, Math.min(1, (v - min) / (max - min)));
-  if (ratio < thresholdRatio) {
-    return Math.round(250 + Math.pow(ratio / thresholdRatio, 1.3) * 220);
-  } else {
-    const boosted = (ratio - thresholdRatio) / (1 - thresholdRatio);
-    return Math.round(470 + Math.pow(boosted, 2.3) * 430);
-  }
-}
-
 const tbody=document.querySelector("#recordsTable tbody");
 
-records.forEach((r, index) => {
-  const row = document.createElement("tr");
-  row.innerHTML = `
-    <td>${index + 1}</td>
+records.forEach((r,i)=>{
+  const row=document.createElement("tr");
+  row.innerHTML=`
+    <td>${i+1}</td>
     <td class="player">${r.player}</td>
     <td class="player">${r.country}</td>
     <td class="rocket">${r.rocketVL}</td>
@@ -295,54 +280,36 @@ records.forEach((r, index) => {
     <td class="rocket">${r.rocketNVL}</td>
     <td class="cannon">${r.cannonVL}</td>
     <td class="cannon">${r.cannonVLE}</td>
-    <td class="cannon">${r.cannonNVL}</td>
-  `;
-  row.querySelectorAll("td.rocket").forEach((td, i) => {
-    const type = ["VL","VLE","VIE","NVL"][i];
-    const val = parseFloat(td.textContent);
-    td.style.color = getRocketColor(td.textContent, type);
-    td.style.fontWeight = getFontWeightAligned(val, type, true);
+    <td class="cannon">${r.cannonNVL}</td>`;
+  row.querySelectorAll("td.rocket").forEach((td,j)=>{
+    const t=["VL","VLE","VIE","NVL"][j];
+    td.style.color=getRocketColor(td.textContent,t);
+    td.style.fontWeight=getFontWeightAligned(td.textContent,t,true);
   });
-  row.querySelectorAll("td.cannon").forEach((td, i) => {
-    const type = ["VL","VLE","NVL"][i];
-    const val = parseFloat(td.textContent);
-    td.style.color = getCannonColor(td.textContent, type);
-    td.style.fontWeight = getFontWeightAligned(val, type, false);
+  row.querySelectorAll("td.cannon").forEach((td,j)=>{
+    const t=["VL","VLE","NVL"][j];
+    td.style.color=getCannonColor(td.textContent,t);
+    td.style.fontWeight=getFontWeightAligned(td.textContent,t,false);
   });
   tbody.appendChild(row);
 });
 
-const table = document.getElementById('recordsTable');
+const table=document.getElementById('recordsTable');
 table.querySelectorAll('tbody td').forEach(cell=>{
-  cell.addEventListener('mouseenter', ()=>{
-    const col = cell.cellIndex;
-    const glow = cell.classList.contains('cannon') ? 'var(--highlight-cannon)' :
-                 cell.classList.contains('rocket') ? 'var(--highlight-rocket)' :
-                 'var(--highlight-player)';
-    table.querySelectorAll('tbody tr').forEach(tr=>{
-      if(tr.children[col]) tr.children[col].style.backgroundColor = glow;
-    });
-    cell.parentElement.querySelectorAll('td').forEach(td=>td.style.backgroundColor=glow);
+  cell.addEventListener('mouseenter',()=>{
+    const col=cell.cellIndex;
+    const row=cell.parentElement;
+    const glow=cell.classList.contains('cannon')?'var(--highlight-cannon)':cell.classList.contains('rocket')?'var(--highlight-rocket)':'var(--highlight-player)';
+    row.querySelectorAll('td').forEach(td=>td.style.backgroundColor=glow);
+    table.querySelectorAll('tbody tr').forEach(tr=>{if(tr.children[col])tr.children[col].style.backgroundColor=glow;});
+    cell.style.backgroundColor='rgba(255,255,255,0.08)';
   });
-  cell.addEventListener('mouseleave', ()=>{
-    const col = cell.cellIndex;
-    table.querySelectorAll('tbody tr').forEach(tr=>{
-      if(tr.children[col]) tr.children[col].style.backgroundColor = '';
-    });
+  cell.addEventListener('mouseleave',()=>{
+    const col=cell.cellIndex;
+    table.querySelectorAll('tbody tr').forEach(tr=>{if(tr.children[col])tr.children[col].style.backgroundColor='';});
     cell.parentElement.querySelectorAll('td').forEach(td=>td.style.backgroundColor='');
   });
 });
-
-let scale = 1;
-document.addEventListener('wheel', e => {
-  if (e.ctrlKey) {
-    e.preventDefault();
-    scale += e.deltaY * -0.001;
-    scale = Math.min(Math.max(0.5, scale), 2.5);
-    document.body.style.transform = `scale(${scale})`;
-    document.body.style.transformOrigin = 'center top';
-  }
-}, { passive: false });
 </script>
 </body>
 </html>
