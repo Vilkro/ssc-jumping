@@ -308,6 +308,7 @@ function getFontWeightAligned(value, type, isRocket = true, thresholdRatio = 0.8
   if (isNaN(v)) return 250;
   const ranges = isRocket ? rocketRanges : cannonRanges;
   const [min, max] = ranges[type] || [0, 100];
+  const ratio = Math.max(0, Math.min(1, (v - min) / (max - min)));
   if (ratio < thresholdRatio) {
     // smooth curve up to mid–high range
     return Math.round(250 + Math.pow(ratio / thresholdRatio, 1.2) * 200);
