@@ -138,15 +138,11 @@ th:first-child, td:first-child {
   text-align:center;
   background:rgba(200,200,200,0.12);
 }
-th:nth-child(2), td:nth-child(2) {
-  width:220px;
-  min-width:220px;
-  padding-left:1rem;
-}
-th:nth-child(3), td:nth-child(3) {
-  width:220px;
-  min-width:220px;
+th:nth-child(2), th:nth-child(3) {
   text-align:center;
+}
+td:nth-child(2), td:nth-child(3) {
+  text-align:left;
   padding-left:1rem;
 }
 th:nth-child(n+4), td:nth-child(n+4) {
@@ -164,7 +160,6 @@ td {
   overflow:hidden;
   transition:background-color 0.25s ease;
 }
-td:nth-child(3){ text-align:left; }
 th:last-child, td:last-child { border-right:none; }
 tr:nth-child(even) td { background-color:rgba(255,255,255,0.05); }
 
@@ -344,16 +339,21 @@ table.querySelectorAll('tbody td').forEach(cell=>{
   });
 });
 
-let zoomLevel = 1;
-const zoomable = document.getElementById("tableContainer");
-document.getElementById("zoomIn").addEventListener("click",()=>{
-  zoomLevel = Math.min(1.6, zoomLevel + 0.1);
-  zoomable.style.transform = `scale(${zoomLevel})`;
+let zoom = 1;
+const tableContainer = document.getElementById('tableContainer');
+document.getElementById('zoomIn').addEventListener('click', ()=>{
+  zoom = Math.min(zoom + 0.1, 1.8);
+  tableContainer.style.transform = `scale(${zoom})`;
 });
-document.getElementById("zoomOut").addEventListener("click",()=>{
-  zoomLevel = Math.max(0.7, zoomLevel - 0.1);
-  zoomable.style.transform = `scale(${zoomLevel})`;
+document.getElementById('zoomOut').addEventListener('click', ()=>{
+  zoom = Math.max(zoom - 0.1, 0.6);
+  tableContainer.style.transform = `scale(${zoom})`;
 });
+document.getElementById('resetZoom').addEventListener('click', ()=>{
+  zoom = 1;
+  tableContainer.style.transform = 'scale(1)';
+});
+  
 </script>
 </body>
 </html>
