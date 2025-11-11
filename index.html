@@ -310,6 +310,7 @@ records.sort((a,b)=>getRowSum(b)-getRowSum(a));
 
 const tbody=document.querySelector("#recordsTable tbody");
 
+  //thickness for height values
 function getFontWeightAligned(value, type, isRocket = true, thresholdRatio = 0.95) {
   if (value === "—" || value === "-") return 250;
   const v = parseFloat(value);
