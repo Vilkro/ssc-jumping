@@ -20,26 +20,19 @@
 }
   
 body {
-  margin: 0; 
-  font-family: "Fira Sans", sans-serif; 
-  font-weight: 400; 
-  font-style: normal;
-  background: 
-    radial-gradient(circle at 25% 25%, rgba(255,255,255,0.07) 0%, transparent 15%),
-    radial-gradient(circle at 75% 35%, rgba(255,255,255,0.05) 0%, transparent 15%),
-    radial-gradient(circle at 50% 80%, rgba(255,200,100,0.04) 0%, transparent 20%),
-    linear-gradient(120deg, #14141e 0%, #1a1b25 10%, #1e202b 20%),
-    linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
-    linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
-    linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px,
-    linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
-    linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
-    linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
-  background-size: 20px 20px;
-  color: var(--text-main); 
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
+  margin: 0;
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 400;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,140,60,0.05) 0%, transparent 30%),
+    radial-gradient(circle at 70% 80%, rgba(255,255,255,0.05) 0%, transparent 40%),
+    linear-gradient(145deg, #0f0f0f 0%, #191919 25%, #1f1f1f 50%, #1a1a1a 75%, #0e0e0e 100%);
+  background-size: 100% 100%;
+  background-attachment: fixed;
+  color: var(--text-main);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   min-height: 100vh;
 }
 
@@ -48,7 +41,6 @@ body::after {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background: conic-gradient(at bottom right, #f33535, #d8e9f0, #33425b, transparent 15%);
   z-index: 0;
 }
 
@@ -317,14 +309,8 @@ function getFontWeightAligned(value, type, isRocket = true, thresholdRatio = 0.9
   const ranges = isRocket ? rocketRanges : cannonRanges;
   const [min, max] = ranges[type] || [0, 100];
   const ratio = Math.max(0, Math.min(1, (v - min) / (max - min)));
-  if (ratio < 0.65) {
-    return 250 + ratio * (400 - 250) / 0.65;
-  } else if (ratio < 0.97) {
-    return 400 + (ratio - 0.65) * (500 - 400) / (0.97 - 0.65);
-  } else {
-    const boosted = Math.pow((ratio - 0.97) / 0.03, 0.65);
-    return Math.round(500 + boosted * (900 - 500));
-  }
+  const weight = 250 + Math.pow(ratio, 1.5) * (900 - 250);
+  return Math.round(weight);
 }
 
 function applyCellStyles() {
