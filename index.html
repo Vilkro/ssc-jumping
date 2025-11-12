@@ -247,9 +247,8 @@ const records = [
   { player:"Val",country:"Kazakhstan",rocketVL:"32",rocketVLE:"36",rocketVIE:"32",rocketNVL:"40",cannonVL:"54",cannonVLE:"57",cannonNVL:"58" },
   { player:"Dark",country:"Russia",rocketVL:"37",rocketVLE:"36",rocketVIE:"33",rocketNVL:"40",cannonVL:"56",cannonVLE:"56",cannonNVL:"57" },
   { player:"Mandy",country:"Russia",rocketVL:"-",rocketVLE:"30",rocketVIE:"-",rocketNVL:"32",cannonVL:"-",cannonVLE:"-",cannonNVL:"-" },
-  { player:"Sandy",country:"India",rocketVL:"37",rocketVLE:"36",rocketVIE:"34",rocketNVL:"40",cannonVL:"56",cannonVLE:"56",cannonNVL:"56" },
+  { player:"Sandy",country:"India",rocketVL:"37",rocketVLE:"36",rocketVIE:"32",rocketNVL:"36",cannonVL:"56",cannonVLE:"56",cannonNVL:"56" },
   { player:"Gohan",country:"India",rocketVL:"35",rocketVLE:"36",rocketVIE:"32",rocketNVL:"36",cannonVL:"50",cannonVLE:"56",cannonNVL:"56" },
-  { player:"Test",country:"ew",rocketVL:"32",rocketVLE:"31",rocketVIE:"33",rocketNVL:"28",cannonVL:"40",cannonVLE:"36",cannonNVL:"50" },
   { player:"Supersniper",country:"Greece",rocketVL:"34",rocketVLE:"-",rocketVIE:"-",rocketNVL:"36",cannonVL:"48",cannonVLE:"-",cannonNVL:"-" },
   { player:"Sony",country:"Argentina",rocketVL:"36",rocketVLE:"36",rocketVIE:"32",rocketNVL:"36",cannonVL:"50",cannonVLE:"56",cannonNVL:"56" },
   { player:"Dev",country:"Russia",rocketVL:"37",rocketVLE:"36",rocketVIE:"34",rocketNVL:"41",cannonVL:"56",cannonVLE:"56",cannonNVL:"56" },
@@ -285,9 +284,9 @@ function getFontWeightAligned(value,type,isRocket=true){
   const ranges=isRocket?rocketRanges:cannonRanges;
   const[min,max]=ranges[type]||[0,100];
   const ratio=Math.max(0,Math.min(1,(v-min)/(max-min)));
-  if(v<=max)return Math.round(250+ratio*100);
+  if(v<=max)return Math.round(250+ratio*150);
   const extra=Math.min(4,v-max);
-  return Math.round(350+extra*150);
+  return Math.round(400+extra*100);
 }
 
 function getRowSum(r){
